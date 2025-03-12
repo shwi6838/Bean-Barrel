@@ -3,9 +3,15 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+} from "react-router-dom";
 
 function App() {
   const [count, setCount] = useState(0)
+  const [users, setUsers] = useState([])
 
   const fetchAPI = async () => {
     try {
@@ -14,7 +20,6 @@ function App() {
       setUsers(response.data.users);
     } catch (err) {
       console.error("Error fetching data:", err);
-      setError(err.message);
     }
   }
 
@@ -24,7 +29,9 @@ function App() {
 
   return (
     <>
+     {/* Test for users test api */}
       <div>
+        <h2>Users Test</h2>
         {/* display the users here */}
         {users.map((user) => (
           <div key={user.id}>
@@ -32,15 +39,18 @@ function App() {
           </div>
         ))}
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      
+      {/* Add Header, NavBar, Footer, and Routes here */}
+      <Header />
+      < Router >
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          {/* Add more routes */}
+        </Routes>
+      </Router>
+
+      <Footer />
     </>
   )
 }
