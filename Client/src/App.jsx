@@ -41,16 +41,16 @@ function App() {
       </div>
       
       {/* Add Header, NavBar, Footer, and Routes here */}
-      <Header />
+      {/* <Header />
       < Router >
         <NavBar />
         <Routes>
           <Route path="/" element={<Home />} />
           {/* Add more routes */}
-        </Routes>
-      </Router>
+        {/* </Routes>
+      </Router> */}
 
-      <Footer />
+      {/* <Footer /> */}
     </>
   )
 }
