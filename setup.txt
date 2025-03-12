@@ -1,0 +1,18 @@
+To set up the server:
+make two terminals
+
+In one: 
+cd server
+venv/Scripts/activate
+python main.py
+
+ctr-c to leave main.py
+deactivate
+
+In other:
+cd Client
+npm run dev
+Go to local host
+
+ctr-c to end
+y
