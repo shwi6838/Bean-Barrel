@@ -1,11 +1,11 @@
 import React from "react";
 
-function LoginPage() {
+function ListPage() {
   return (
     <div>
-      <h1>Login</h1>
+      <h1>List</h1>
     </div>
   );
 }
 
-export default LoginPage
+export default ListPage
