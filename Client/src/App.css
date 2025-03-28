@@ -1,16 +1,19 @@
 #root {
-  max-width: 1280px;
+  width: 100% !important;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0.1rem;
   text-align: center;
 }
 /* // CSS Variables for themeing */
 :root {
   --brand-color: #8f5f3d;
-  --brand-color-light: #ac7d55;
+  --brand-color-light: #b8865a;
   --brand-color-dark: #5c3a21;
 
   --bg-rose: #ffe8e1;
+  --brand-green: #2c3b2b;
+  --brand-green-light: #60825e;
+  --brand-green-dark: #1f2a1f;
 }
 
 /* -------------------- Footer CSS -------------------- */
@@ -19,46 +22,134 @@
   left: 0;
   bottom: 0;
   width: 100%;
-  background-color: var(--brand-color);
+  height: 80px;
+  background-color: var(--brand-green-light);
   color: white;
   text-align: center;
-  padding: 1rem;
+  padding: .8rem;
+}
+.sticky-footer a {
+  color: white;
+  text-decoration: none;
+}
+.sticky-footer h4 {
+  margin: 0;
+  font-size: 1rem;
 }
 
 /* -------------------- Nav Page CSS -------------------- */
-.c-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
+.custom-navbar {
   width: 100% !important;
-  background-color: var(--bg-rose) !important;
-  justify-content: space-around;
+  padding: 10px 20px;
+  /* background-color: #ffff !important; */
+  justify-content: space-evenly !important;
   margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(8px); /* Frosted glass effect */
 }
-.c-nav-link {
+.custom-navbar .c-nav-brand {
+  color: var(--brand-color-dark) !important;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.custom-navbar .c-nav-link {
+  color: var(--brand-color-dark) !important;
+  font-size: 1rem;
+  font-weight: bold;
+  margin: 0 10px;
+}
+.custom-navbar .c-nav-link:hover {
   color: var(--brand-color) !important;
 }
-.c-nav-link:hover {
-  color: var(--brand-color-light) !important;
+.custom-navbar .c-nav-link:focus {
+  color: var(--brand-color) !important;
 }
-.c-nav-link.active {
-  color: var(--brand-color-light) !important;
+.custom-navbar .c-nav-link.active {
+  color: var(--brand-color) !important;
 }
 
-.nav-button
+.custom-navbar .nav-button
 {
-  background-color: var(--brand-color) !important;
+  background-color: var(--brand-color-dark) !important;
   color: white;
   border: none;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   cursor: pointer;
 }
-.nav-button:hover
+.custom-navbar .nav-button:hover
 {
-  background-color: var(--brand-color-light) !important;
+  background-color: var(--brand-color) !important;
 }
-.nav-button:active
+.custom-navbar .nav-button:active
 {
-  background-color: var(--brand-color-light) !important;
+  background-color: var(--brand-color) !important;
 }
+
+/* -------------------- Login Page CSS -------------------- */
+.login-page {
+  background: url('./assets/cafe-login.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 0 6%;
+  height: 80vh;
+  width: 100%;
+}
+
+.login-card {
+  background-color: rgba(111, 83, 56, 0.3);
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  padding: 3rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--brand-color-light); /* Subtle border */
+  border-radius: 12px; /* Rounded corners */
+  width: 370px; /* Fixed width for the card */
+  height: 400px; /* Fixed height for the card */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #ffffff; /* White text */
+  font-family: "Arial", sans-serif;
+}
+
+.login-page h2 {
+  font-size: 2rem;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.login-card .form-control {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: #ffffff;
+  padding: 1rem;
+}
+.login-card .form-control:focus {
+  background: rgba(255, 255, 255, 0.3);
+  color: #ffffff;
+  outline: none;
+  box-shadow: none;
+}
+
+.login-card .form-control::placeholder {
+  color: var(--bg-rose);
+  opacity: 0.6; /* Adjust opacity for placeholder */
+}
+
+/*-------------------------- Register Page CSS -------------------- */
+.register-page {
+  background: url('./assets/cafe-login.jpg') no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 6%;
+  height: 80vh;
+  width: 100%;
+}
+
+
+

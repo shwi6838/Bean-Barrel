@@ -12,7 +12,7 @@ function ProfilePage() {
     const [activeTab, setActiveTab] = useState("account");
 
     return (
-        <Container>
+        <Container fluid>
             <h1>Profile Page</h1>
             <div className="mt-5 mb-4">
                 <ButtonGroup>
