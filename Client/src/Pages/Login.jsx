@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom"; // 确保你的项目使用了 React Router
+import { Link } from "react-router-dom"; // 确保你的项目使用了 React Router
 
 function LoginPage() {
   const [username, setUsername] = useState("");
@@ -61,21 +62,26 @@ function LoginPage() {
   };
 
   return (
-    <div>
-      <h2>Login</h2>
+    <div className="login-page">
+      <div className="login-card">
+      <h2>Welcome Back!</h2>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className="mb-3">
+        <label htmlFor="username">Username</label>
         <input
           type="text"
-          placeholder="Username"
+          className="form-control"
+          placeholder="Enter Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           required
         />
         <br />
+        <label htmlFor="password">Password</label>
         <input
           type="password"
-          placeholder="Password"
+          className="form-control"
+          placeholder="Enter Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           required
@@ -92,6 +98,8 @@ function LoginPage() {
           Logout
         </button>
       </form>
+      <p>Don't have an account? <Link to="/register" className="register-link">Register</Link></p>
+    </div>
     </div>
   );
 }
