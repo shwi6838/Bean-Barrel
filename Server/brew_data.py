@@ -195,7 +195,7 @@ def add_to_favourite(user_id, new_favourite_id):#untested function
         return False
 
 
-def search_favourite_list(user_id):
+def search_favourite_list(user_id):#return the list of favourite_id of the user
     try:
         # Get database and collection
         db = client["brew&barrel"]
@@ -224,7 +224,7 @@ def search_favourite_list(user_id):
         print(f"Error searching favourite list: {e}")
         return []
     
-def search_userinfo(email):
+def search_userinfo(email):#return the user_id, name, and phone_number of the user based on the email
     try:
         # Get database and collection
         db = client["brew&barrel"]
@@ -235,20 +235,84 @@ def search_userinfo(email):
         
         if user is None:
             print(f"No user found with email: {email}")
-            return None, None
+            return None, None, None
             
-        # Extract username and user_id
-        username = user.get("user_name")
+        # Extract user information
         user_id = user.get("user_id")
+        name = user.get("name")
+        phone_number = user.get("Phone_number")
         
-        print(f"Found user: {username} (ID: {user_id})")
-        return user_id
+        print(f"Found user: {name} (ID: {user_id}, Phone: {phone_number})")
+        return user_id, name, phone_number
         
     except Exception as e:
         print(f"Error searching user info: {e}")
-        return None, None
+        return None, None, None
 
 
 #print(verify(client, "brew&barrel", "user", "12345@colorado.edu", "23456"))
+def verify_for_registration(rigister_str):#return true if the user is registered（email or phone number）, otherwise return false
+    try:
+        # Get database and collection
+        db = client["brew&barrel"]
+        collection = db["user"]
+        
+        # Check if the input contains '@' to determine if it's an email
+        if '@' in rigister_str:
+            # Search by email
+            user = collection.find_one({"email": rigister_str})
+            if user is not None:
+                print(f"Email {rigister_str} is already registered")
+                return True
+            else:
+                print(f"Email {rigister_str} is available")
+                return False
+        else:
+            # Search by phone number
+            user = collection.find_one({"Phone_number": rigister_str})
+            if user is not None:
+                print(f"Phone number {rigister_str} is already registered")
+                return True
+            else:
+                print(f"Phone number {rigister_str} is available")
+                return False
+                
+    except Exception as e:
+        print(f"Error verifying registration: {e}")
+        return False
+    
+def add_user(user_name, password, email, Phone_number, name):
+    try:
+        # Get database and collection
+        db = client["brew&barrel"]
+        collection = db["user"]
+        
+        # Find the maximum user_id in the collection
+        max_user = collection.find_one(sort=[("user_id", -1)])
+        new_user_id = 1 if max_user is None else max_user["user_id"] + 1
+        
+        # Create new user document
+        new_user = {
+            "user_id": new_user_id,
+            "user_name": user_name,
+            "password": password,
+            "email": email,
+            "Phone_number": Phone_number,
+            "name": name
+        }
+        
+        # Insert the new user
+        result = collection.insert_one(new_user)
+        
+        if result.inserted_id:
+            print(f"Successfully added new user with ID: {new_user_id}")
+            return True
+        else:
+            print("Failed to add new user")
+            return False
+            
+    except Exception as e:
+        print(f"Error adding new user: {e}")
+        return False
 
 client = connection_test()
