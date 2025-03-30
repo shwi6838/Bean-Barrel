@@ -18,21 +18,44 @@ def login():
     res = db.verify("brew&barrel", "user", username, password)
     print(res)
     if res[0] == 'success':
-        userid = db.search_userinfo(username)
+        userid, name, phone = db.search_userinfo(username)
         favlist = db.search_favourite_list(user_id=userid)
         print(f"userid: {userid}, username:{username}, favlist:{favlist}")
         session['userid'] = userid
         session['username'] = username
-        session['favlist'] = ','.join(favlist)
+        session['name'] = name
+        session['favlist'] = favlist
+        session['phone'] = phone
         print("Session after setting:", session)
         print("Session dict:", dict(session))
         response = jsonify({"success": True})
         print("Response headers:", response.headers)
         return response
+    else:
+        return jsonify({"success": False, "error": res[0]})
+
+
+@auth.route('/register', methods=['POST'])
+def signup():
+    data = request.get_json()
+    if not data:
+        return jsonify({"error":"Invalid JSON data"}), 400
+    name = data.get('name')
+    phone = data.get('phone')
+    username = data.get('username')
+    password = data.get('password')
+
+    if not db.verify_for_registration(username) and not db.verify_for_registration(phone):
+        db.add_user(username,password,username,phone,name)
+        return jsonify({"success":True})
+    return jsonify({"success":False})
+
+
+    
 
 @auth.route('/logout', methods=['POST'])
 def logout():
-    session.clear()  # 清除所有session数据
+    session.clear()  # clean all session data
     print("Session after logout:", session)
     print("Session dict:", dict(session))
     response = jsonify({"success": True})

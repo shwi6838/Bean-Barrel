@@ -7,9 +7,9 @@ app = Flask(__name__)
 app.secret_key="123456"
 app.config['SESSION_COOKIE_NAME'] = 'session1'
 app.config['SESSION_COOKIE_SAMESITE'] = 'Lax'
-app.config['SESSION_COOKIE_SECURE'] = False  # 开发环境设置为False
+app.config['SESSION_COOKIE_SECURE'] = False  #Dev Enviornment set to False
 app.config['SESSION_COOKIE_HTTPONLY'] = True
-app.config['SESSION_COOKIE_DOMAIN'] = 'localhost'  # 确保cookie域名正确
+app.config['SESSION_COOKIE_DOMAIN'] = 'localhost'  #Ensure Cookie Domain correct
 
 cors = CORS(app, 
     origins=['http://localhost:5173'],
@@ -24,23 +24,17 @@ app.register_blueprint(auth, url_prefix='/auth')
 # TEST DATA
 @app.route("/api/users", methods=['GET'])
 def users():
-   print(session)
    if 'userid' in session:
-       print("enter first loop")
        return jsonify ({
            "users": [
-               {"id": session['userid'], "name": session['username'], 'favlist': session['favlist']}
+               {"id": session['userid'], "name": session['name'],
+                "username": session['username'], "phone":session['phone'], 'favlist': session['favlist']}
            ]
        })
-   print("enter second loop")
    return jsonify(
         {
             # // Data needs a key/id
-            "users": [
-                {"id":1, "name": "John", "favlist":"123"},
-                {"id":2, "name": "Jane","favlist":"234"},
-                {"id":3, "name": "Sam","favlist":"123,234"},
-            ]
+            "users": []
         }
     )
 

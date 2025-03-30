@@ -1,15 +1,36 @@
 
-import React, { useState } from 'react';
+import React, { useState,useEffect} from 'react';
 import { Container, Button, ButtonGroup, Card } from 'react-bootstrap';
-
+import axios from "axios";
 
 function ProfilePage() {
     const [testProfile, setTestProfile] = useState({
-        name: "John Doe",
-        email: "example@gmail.com",
-        phone: "123-456-7890",
+        name: "",
+        email: "",
+        phone: "",
+        favlist: []
     });
     const [activeTab, setActiveTab] = useState("account");
+    const fetchAPI = async () => {
+        try {
+          const response = await axios.get("http://localhost:3080/api/users", {
+            withCredentials: true
+          });
+          console.log("API Response:", response.data);
+          console.log("Users data:", response.data.users);
+          const name = response.data.users[0]['name']
+          const email = response.data.users[0]['username']
+          const phone = response.data.users[0]['phone']
+          const favlist = response.data.users[0]['favlist']
+          setTestProfile({name, email, phone, favlist})
+        } catch (err) {
+          console.error("Error fetching data:", err);
+        }
+      }
+
+    useEffect(() => {
+      fetchAPI();
+    }, []);
 
     return (
         <Container fluid>
@@ -39,12 +60,12 @@ function ProfilePage() {
                     <Card.Body>
                         <Card.Title>Favorite Stores</Card.Title>
                         <Card.Text>
-                            <p>Cafe 1</p>
-                            <p>Cafe 2</p>
-                            <p>Bar 1</p>
+                            {testProfile.favlist.map((id, index) => (
+                                <p key={index}>{id}</p>
+                            ))}
                         </Card.Text>
                     </Card.Body>
-                </Card> 
+                </Card>
             )}
         </Container>
     );

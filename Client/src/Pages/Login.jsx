@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // 确保你的项目使用了 React Router
-import { Link } from "react-router-dom"; // 确保你的项目使用了 React Router
+import { useNavigate } from "react-router-dom"; 
+import { Link } from "react-router-dom"; 
 
 function LoginPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
-  const navigate = useNavigate(); // 用于前端页面跳转
+  const navigate = useNavigate(); //Using Frontend pages navigate
 
   const handleLogout = async () => {
     try {
@@ -30,7 +30,7 @@ function LoginPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError(null); // 清除之前的错误
+    setError(null);
 
     try {
       const response = await fetch("http://localhost:3080/auth/login", {
@@ -46,13 +46,13 @@ function LoginPage() {
       console.log("Response:", data);
 
       if (data.success) {
-        // 跳转到后端返回的 URL
+        // navigate specific url
         navigate("/");
       } else {
         setError(data.error || "Login failed. Please try again.");
       }
 
-      // 清除输入框
+      // clean input boxs after username and password entered
       setUsername("");
       setPassword("");
     } catch (error) {

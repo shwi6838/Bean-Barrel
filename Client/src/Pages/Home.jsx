@@ -22,17 +22,12 @@ function HomePage(jsonform) {
 
     return (
         <div>
-        <h1>Landing Page</h1>
-        <p>Welcome to the Home Page</p>
+        <h1>Welcome to the Home Page</h1>
         <div>
-            <h2>Users API Test</h2>
             {users && users.map((user) => {
                 console.log("Processing user:", user);
                 return (
-                    <div key={user.id} style={{ display: 'flex', alignItems: 'center', gap: '20px', margin: '10px 0' }}>
-                        <h3>Username: {user.name}</h3>
-                        <h3>Favorite List : {user.favlist}</h3>
-                    </div>
+                  <h3>Username: {user.name}</h3>
                 );
             })}
         </div>
