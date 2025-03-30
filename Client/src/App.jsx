@@ -15,6 +15,7 @@ import ListPage from './Pages/List';
 import ProfilePage from './Pages/Profile';
 import LoginPage from './Pages/Login';
 import RegisterPage from './Pages/Register';
+import TestLanding from "./Pages/TestLanding";
 
 function App() {
 
@@ -31,6 +32,7 @@ function App() {
             <Route path='/profile' element={<ProfilePage />} />
             <Route path='/login' element={<LoginPage />} />
             <Route path='/register' element={<RegisterPage />} />
+            <Route path="/test" element={<TestLanding />} />
           </Routes>
         </main>
       </div>
