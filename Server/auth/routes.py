@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify, session
-from brew_data import connection_test
-import brew_data as db
+from Server.Database.brew_data import connection_test
+import Server.Database.brew_data as db
 
 
 auth = Blueprint('auth', __name__)
