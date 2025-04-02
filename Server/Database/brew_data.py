@@ -4,7 +4,7 @@ import certifi
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-import Server.Database.brew_data as db
+import Database.brew_data as db
 
 
 def connection_test():  # connect to the database and return the client object
