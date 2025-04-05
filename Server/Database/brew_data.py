@@ -315,4 +315,6 @@ def add_user(user_name, password, email, Phone_number, name):
         print(f"Error adding new user: {e}")
         return False
 
+
+
 client = connection_test()
