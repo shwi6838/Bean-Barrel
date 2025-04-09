@@ -3,10 +3,10 @@ make two terminals
 
 In one: 
 cd server
-venv/Scripts/activate
+venv/Scripts/activate (source venv/bin/activate for Mac)
 python main.py
 
-ctr-c to leave main.py
+ptr-c to leave main.py
 deactivate
 
 In other:
