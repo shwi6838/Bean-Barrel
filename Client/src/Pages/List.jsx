@@ -42,7 +42,7 @@ function ListPage() {
       await axios.delete(`http://localhost:3080/api/favorites/${storeId}`, {
         withCredentials: true,
       });
-      setFavorites((prev) => prev.filter((s) => s.store_id !== storeId));
+      setFavorites((prev) => prev.filter((id) => id !== storeId));
     } catch (err) {
       console.error("Failed to remove favorite", err);
     }
@@ -56,7 +56,7 @@ function ListPage() {
     if (loggedIn) {
       fetchFavorites();
     } else {
-      setLoading(false); // stop spinner if not logged in
+      setLoading(false);
     }
   }, [loggedIn]);
 
@@ -94,38 +94,26 @@ function ListPage() {
 
   return (
     <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Your Saved Places</h1>
+      <h1 className="text-2xl font-bold mb-4">Your Saved Store IDs</h1>
       {favorites.length === 0 ? (
         <p>No saved places yet.</p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {favorites.map((store) => (
-            <div key={store._id} className="border rounded-lg p-4 shadow">
-              <img
-                src={store.image || "/placeholder.jpg"}
-                alt={store.name}
-                className="w-full h-40 object-cover rounded"
-              />
-              <h2 className="text-xl font-semibold mt-2">{store.name}</h2>
-              <p className="text-gray-600">{store.address}</p>
-              <p className="text-sm mt-1">Price: {store.price_level || "N/A"}</p>
-              <div className="mt-4 flex gap-2">
-                <button
-                  onClick={() => handleRemove(store.store_id)}
-                  className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
-                >
-                  Remove
-                </button>
-                <button
-                  onClick={() => alert("Details page coming soon!")}
-                  className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600"
-                >
-                  View Details
-                </button>
-              </div>
-            </div>
+        <ul className="space-y-2">
+          {favorites.map((storeId) => (
+            <li
+              key={storeId}
+              className="border rounded p-3 flex items-center justify-between"
+            >
+              <span>{storeId}</span>
+              <button
+                onClick={() => handleRemove(storeId)}
+                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+              >
+                Remove
+              </button>
+            </li>
           ))}
-        </div>
+        </ul>
       )}
     </div>
   );
