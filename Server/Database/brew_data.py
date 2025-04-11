@@ -314,7 +314,48 @@ def add_user(user_name, password, email, Phone_number, name):
     except Exception as e:
         print(f"Error adding new user: {e}")
         return False
-
+        
+def delete_from_favourite(user_id, favourite_id_to_remove):
+    try:
+        # Get database and collection
+        db = client["brew&barrel"]
+        collection = db["user_favourite"]
+        
+        # Try to convert user_id to integer if it's a string
+        try:
+            if isinstance(user_id, str):
+                user_id = int(user_id)
+        except ValueError:
+            pass  # Keep it as string if conversion fails
+        
+        # Check if user exists
+        user = collection.find_one({"user_id": user_id})
+        
+        if user is None:
+            print(f"User {user_id} not found in favourite list")
+            return False
+            
+        # Check if the favourite_id exists in the list
+        if favourite_id_to_remove not in user.get("favourite_id", []):
+            print(f"ID {favourite_id_to_remove} is not in user {user_id}'s favourite list")
+            return False
+            
+        # Remove favourite_id from the list using $pull operator
+        result = collection.update_one(
+            {"user_id": user_id},
+            {"$pull": {"favourite_id": favourite_id_to_remove}}
+        )
+        
+        if result.modified_count > 0:
+            print(f"Successfully removed {favourite_id_to_remove} from user {user_id}'s favourite list")
+            return True
+        else:
+            print("No changes made")
+            return False
+            
+    except Exception as e:
+        print(f"Error removing from favourite: {e}")
+        return False
 
 
 client = connection_test()
