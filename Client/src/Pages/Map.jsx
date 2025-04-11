@@ -10,7 +10,7 @@ function MapPage() {
                 style={{ border: 0 }}
                 loading="lazy"
                 allowFullScreen
-                src={`https://www.google.com/maps/embed/v1/search?q=cafe&key=AIzaSyA70Gar_IcD8ukAkW1bOsVuniZEddlPAqM`}
+                src={``}
             ></iframe>
         </div>
     );

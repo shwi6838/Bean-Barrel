@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify, session
-from Database.brew_data import connection_test
 import Database.brew_data as db
 
 
