@@ -56,7 +56,7 @@ function ListPage() {
     if (loggedIn) {
       fetchFavorites();
     } else {
-      setLoading(false);
+      setLoading(false); // stop spinner if not logged in
     }
   }, [loggedIn]);
 
@@ -69,7 +69,7 @@ function ListPage() {
         <button
           onClick={() => navigate("/login")}
           style={{
-            backgroundColor: "var(--brand-color-dark)",
+            backgroundColor: "#357bc1", // was var(--brand-color-dark)
             color: "white",
             padding: "0.75rem 1.5rem",
             border: "none",
@@ -80,10 +80,10 @@ function ListPage() {
             transition: "background-color 0.3s ease",
           }}
           onMouseOver={(e) =>
-            (e.target.style.backgroundColor = "var(--brand-color)")
+            (e.target.style.backgroundColor = "#4e9af1") // was var(--brand-color)
           }
           onMouseOut={(e) =>
-            (e.target.style.backgroundColor = "var(--brand-color-dark)")
+            (e.target.style.backgroundColor = "#357bc1")
           }
         >
           Log In to See Your List
@@ -107,7 +107,22 @@ function ListPage() {
               <span>{storeId}</span>
               <button
                 onClick={() => handleRemove(storeId)}
-                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600"
+                style={{
+                  backgroundColor: "#357bc1", // was var(--brand-color-dark)
+                  color: "white",
+                  padding: "0.5rem 1rem",
+                  border: "none",
+                  borderRadius: "6px",
+                  fontWeight: "bold",
+                  cursor: "pointer",
+                  transition: "background-color 0.3s ease",
+                }}
+                onMouseOver={(e) =>
+                  (e.target.style.backgroundColor = "#4e9af1") // was var(--brand-color)
+                }
+                onMouseOut={(e) =>
+                  (e.target.style.backgroundColor = "#357bc1")
+                }
               >
                 Remove
               </button>
