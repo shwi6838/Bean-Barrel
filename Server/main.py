@@ -2,6 +2,7 @@ import os
 from flask import Flask, jsonify, session
 from flask_cors import CORS
 from auth.routes import auth
+from list.routes import favlist
 
 app = Flask(__name__)
 app.secret_key="123456"
@@ -20,6 +21,7 @@ cors = CORS(app,
 )
 
 app.register_blueprint(auth, url_prefix='/auth')
+app.register_blueprint(favlist, url_prefix='/list')
 
 # TEST DATA
 @app.route("/api/users", methods=['GET'])

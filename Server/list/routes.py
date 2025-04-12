@@ -2,9 +2,9 @@ from flask import Blueprint, request, jsonify, session
 import Database.brew_data as db
 
 
-list = Blueprint('list', __name__)
+favlist = Blueprint('list', __name__)
 
-@app.route("/api/favorites", methods=["GET"])
+@favlist.route("/favorites", methods=["GET"])
 def get_favorites_list():
     if "userid" not in session:
         return jsonify({"error": "Unauthorized"}), 401
@@ -14,7 +14,7 @@ def get_favorites_list():
 
     return jsonify(fav_ids)
 
-@app.route("/api/favorites", methods=["POST"])
+@favlist.route("/favorites", methods=["POST"])
 def add_favorite_list():
     if "userid" not in session:
         return jsonify({"error": "Unauthorized"}), 401
@@ -34,7 +34,7 @@ def add_favorite_list():
         return jsonify({"error": "Already exists or failed to add"}), 400
 
 
-@app.route("/api/favorites/<store_id>", methods=["DELETE"])
+@favlist.route("/favorites/<store_id>", methods=["DELETE"])
 def remove_favorite_list(store_id):
     if "userid" not in session:
         return jsonify({"error": "Unauthorized"}), 401

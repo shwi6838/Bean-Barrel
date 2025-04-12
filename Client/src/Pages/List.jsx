@@ -26,7 +26,7 @@ function ListPage() {
 
   const fetchFavorites = async () => {
     try {
-      const res = await axios.get("http://localhost:3080/api/favorites", {
+      const res = await axios.get("http://localhost:3080/list/favorites", {
         withCredentials: true,
       });
       setFavorites(res.data);
@@ -39,7 +39,7 @@ function ListPage() {
 
   const handleRemove = async (storeId) => {
     try {
-      await axios.delete(`http://localhost:3080/api/favorites/${storeId}`, {
+      await axios.delete(`http://localhost:3080/list/favorites/${storeId}`, {
         withCredentials: true,
       });
       setFavorites((prev) => prev.filter((id) => id !== storeId));
