@@ -9,11 +9,14 @@ function MapPage() {
 
     return (
         <div style={{ height: "79vh", width: "100vw", margin: 0, padding: 0 }}>
+            <p title="Search result for Cafes in Boulder, CO" />
             <APIProvider apiKey = {apiKey}>
                 <Map
-                    title="Search result for Cafes in Boulder, CO"
+    
                     width="100%"
                     height="100%"
+                    defaultCenter={position}
+                    defaultZoom={13}
                     style={{ border: 0 }}
                 />
             </APIProvider>
