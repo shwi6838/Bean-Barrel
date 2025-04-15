@@ -5,7 +5,7 @@ const position = { lat: 40.015, lng: -105.2705 }; // Boulder, CO
 
 
 function MapPage() {
-    const apiKey = import.meta.env.GOOGLE_MAPS_API_KEY;
+    const apiKey = import.meta.env.VITE_GOOGLE_MAPS_API_KEY;
     GOOGLE_MAPS_API_KEY
     return (
         <div style={{ height: "79vh", width: "100vw", margin: 0, padding: 0 }}>
