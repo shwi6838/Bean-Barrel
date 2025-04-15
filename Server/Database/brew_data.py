@@ -6,7 +6,10 @@ import requests
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-api_key = ""
+from dotenv import load_dotenv
+load_dotenv()
+
+api_key = os.getenv("GOOGLE_MAPS_API_KEY")
 
 
 def connection_test():  # connect to the database and return the client object
