@@ -1,10 +1,12 @@
 import os
 import certifi
+import csv
+import requests
 # Press Ctrl+F8 to toggle the breakpoint.
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-import Database.brew_data as db
+api_key = "AIzaSyDxZ3296MzNXVSP-OkQshqasiwxWBKxb1k"
 
 
 def connection_test():  # connect to the database and return the client object
@@ -357,5 +359,85 @@ def delete_from_favourite(user_id, favourite_id_to_remove):
         print(f"Error removing from favourite: {e}")
         return False
 
+def get_shop_photo_by_id(shop_id, max_width=400, max_height=400):
+    """
+    Get shop photo by shop ID and image size
+    
+    Args:
+        shop_id (str): Shop ID
+        max_width (int): Maximum width of the image, default is 400
+        max_height (int): Maximum height of the image, default is 400
+        
+    Returns:
+        bytes: Image data, returns None if failed
+    """
+    try:
+        # Get shop information from database
+        db = client["brew&barrel"]
+        collection = db["store"]
+        
+        # Query shop information
+        shop = collection.find_one({"place_id": shop_id})
+        
+        if not shop or "photo_reference" not in shop:
+            print(f"Shop {shop_id} not found or no photo available")
+            return None
+            
+        # Get photo_reference
+        photo_reference = shop["photo_reference"]
+        
+        # Build Google Places API URL with both maxwidth and maxheight
+        photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={max_width}&maxheight={max_height}&photo_reference={photo_reference}&key={api_key}"
+        
+        # Send request to get image
+        response = requests.get(photo_url)
+        
+        if response.status_code == 200:
+            return response.content
+        else:
+            print(f"Failed to get image, status code: {response.status_code}")
+            return None
+            
+    except Exception as e:
+        print(f"Error getting shop photo: {e}")
+        return None
+    
+def get_shop_info_by_id(shop_id):
+    """
+    Get all shop information by shop ID
+    
+    Args:
+        shop_id (str): Shop ID (place_id)
+        
+    Returns:
+        list: A list containing all field values of the shop, returns empty list if failed
+    """
+    try:
+        # Get shop information from database
+        db = client["brew&barrel"]
+        collection = db["store"]
+        
+        # Query shop information
+        shop = collection.find_one({"place_id": shop_id})
+        
+        if not shop:
+            print(f"Shop {shop_id} not found")
+            return []
+            
+        # Convert shop document to list of values
+        shop_info = list(shop.values())
+        
+        return shop_info
+            
+    except Exception as e:
+        print(f"Error getting shop info: {e}")
+        return []
 
 client = connection_test()
+
+if __name__ == "__main__":
+    # 测试获取第一个店铺的图片
+    print(get_shop_photo_by_id("ChIJSfk7TzDta4cRw-8qPlOhbDU", 400))
+    # 测试获取店铺信息
+    #print(get_shop_info_by_id("ChIJSfk7TzDta4cRw-8qPlOhbDU"))
+
