@@ -6,7 +6,7 @@ import requests
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-api_key = "AIzaSyDxZ3296MzNXVSP-OkQshqasiwxWBKxb1k"
+api_key = ""
 
 
 def connection_test():  # connect to the database and return the client object
@@ -434,10 +434,4 @@ def get_shop_info_by_id(shop_id):
         return []
 
 client = connection_test()
-
-if __name__ == "__main__":
-    # 测试获取第一个店铺的图片
-    print(get_shop_photo_by_id("ChIJSfk7TzDta4cRw-8qPlOhbDU", 400))
-    # 测试获取店铺信息
-    #print(get_shop_info_by_id("ChIJSfk7TzDta4cRw-8qPlOhbDU"))
 
