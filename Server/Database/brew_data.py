@@ -359,7 +359,7 @@ def delete_from_favourite(user_id, favourite_id_to_remove):
         print(f"Error removing from favourite: {e}")
         return False
 
-def get_shop_photo_by_id(shop_id, max_width=400, max_height=400):
+def get_shop_photo_by_id(shop_id, max_width=400, max_height=400):#modified function
     """
     Get shop photo by shop ID and image size
     
@@ -374,7 +374,7 @@ def get_shop_photo_by_id(shop_id, max_width=400, max_height=400):
     try:
         # Get shop information from database
         db = client["brew&barrel"]
-        collection = db["store"]
+        collection = db["stores"]
         
         # Query shop information
         shop = collection.find_one({"place_id": shop_id})
@@ -402,7 +402,7 @@ def get_shop_photo_by_id(shop_id, max_width=400, max_height=400):
         print(f"Error getting shop photo: {e}")
         return None
     
-def get_shop_info_by_id(shop_id):
+def get_shop_info_by_id(shop_id):#modified function
     """
     Get all shop information by shop ID
     
@@ -415,7 +415,7 @@ def get_shop_info_by_id(shop_id):
     try:
         # Get shop information from database
         db = client["brew&barrel"]
-        collection = db["store"]
+        collection = db["stores"]
         
         # Query shop information
         shop = collection.find_one({"place_id": shop_id})
@@ -433,7 +433,7 @@ def get_shop_info_by_id(shop_id):
         print(f"Error getting shop info: {e}")
         return []
 
-def get_all_shop_info():
+def get_all_shop_info():#modified function
     """
     Get all shop information from the database
     
@@ -442,7 +442,7 @@ def get_all_shop_info():
     """
     try:
         db = client["brew&barrel"]
-        collection = db["store"]
+        collection = db["stores"]
         
         shops = collection.find({})
         
@@ -453,5 +453,7 @@ def get_all_shop_info():
     except Exception as e:
         print(f"Error getting all shop info: {e}")
         return []
+if __name__ == "__main__":
+    client = connection_test()
+    print(get_all_shop_info())
 
-client = connection_test()
