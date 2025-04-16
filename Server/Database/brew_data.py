@@ -433,5 +433,25 @@ def get_shop_info_by_id(shop_id):
         print(f"Error getting shop info: {e}")
         return []
 
-client = connection_test()
+def get_all_shop_info():
+    """
+    Get all shop information from the database
+    
+    Returns:
+        list: A list containing all shops' information, returns empty list if failed
+    """
+    try:
+        db = client["brew&barrel"]
+        collection = db["store"]
+        
+        shops = collection.find({})
+        
+        all_shops_info = [list(shop.values()) for shop in shops]
+        
+        return all_shops_info
+            
+    except Exception as e:
+        print(f"Error getting all shop info: {e}")
+        return []
 
+client = connection_test()
