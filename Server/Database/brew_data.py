@@ -10,18 +10,17 @@ api_key = ""
 
 
 def connection_test():  # connect to the database and return the client object
-    uri = ("mongodb+srv://ziwa8314:X7iJVIeXiOpsRxad@googlecluster.8k1hr.mongodb.net/?retryWrites=true&w=majority"
-           "&appName=googlecluster")
-
-    client = MongoClient(uri, server_api=ServerApi('1'),tlsCAFile=certifi.where())
-
     try:
+        uri = ("mongodb+srv://ziwa8314:X7iJVIeXiOpsRxad@googlecluster.8k1hr.mongodb.net/?retryWrites=true&w=majority")
+        client = MongoClient(uri, server_api=ServerApi('1'), tlsCAFile=certifi.where())
         client.admin.command('ping')
-        print("Pinged your deployment. You successfully connected to MongoDB!")
+        print("MongoDB connected successfully.")
         return client
     except Exception as e:
-        print(e)
+        print(f"MongoDB connection error: {e}")
+        return None
 
+client = connection_test()
 
 def view_all_database():  # return the list of database
 
@@ -450,6 +449,23 @@ def get_all_shop_info():#modified function
         
         return all_shops_info
             
+    Get all shop information from the database (used for /api/shops)
+
+    Returns:
+        list: A list of dictionaries with shop name, rating, and location
+    """
+    try:
+        if client is None:
+            raise Exception("MongoDB client is not connected.")
+        db = client["brew&barrel"]
+        collection = db["store"]
+        shops = collection.find({}, {
+            "_id": 0,
+            "name": 1,
+            "rating": 1,
+            "vicinity": 1
+        })
+        return list(shops)
     except Exception as e:
         print(f"Error getting all shop info: {e}")
         return []

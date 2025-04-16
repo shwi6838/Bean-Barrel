@@ -1,0 +1,68 @@
+/* Main layout container alignment */
+.home-left-aligned {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    text-align: left;
+  }
+  
+  .container.mt-5 {
+    margin-top: 1rem !important;
+    padding-left: 0 !important;
+  }
+  
+  
+  /* Subheading (under title) */
+  .subheading {
+    font-size: 1.2rem;
+    color: #926545;
+    margin-bottom: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  /* Headings */
+  h1.fw-bold,
+  p.lead,
+  h3,
+  .section-heading {
+    color: #926545;
+  }
+  
+  .section-heading {
+    font-weight: 700;
+  }
+  
+  /* Hero Banner Image Section */
+  .hero-images {
+    display: flex;
+    justify-content: flex-start;  /* Align left instead of center */
+    gap: 12px;
+    margin-top: 20px;
+    overflow-x: auto;
+  }
+  
+  .hero-img {
+    width: 140px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  
+  /* Review Cards */
+  .review-row {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-top: 10px;
+  }
+  
+  .review-card {
+    border: 1px solid #ccc;
+    border-radius: 12px;
+    padding: 20px;
+    margin: 10px 10px 10px 0;
+    width: 280px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
