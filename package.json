@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@vis.gl/react-google-maps": "^1.5.2"
+    "@vis.gl/react-google-maps": "^1.5.2",
+    "axios": "^1.8.4"
   }
 }

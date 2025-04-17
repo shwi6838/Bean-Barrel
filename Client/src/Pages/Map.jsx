@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { APIProvider, Map, AdvancedMarker } from "@vis.gl/react-google-maps";
+import axios from 'axios';
 
 function MapPage() {
     const [shops, setShops] = useState([]);
@@ -25,20 +26,7 @@ function MapPage() {
     if (loading) return <div> Loading shops...</div>
 
     return (
-        <div style={{ display: "flex", height: "79vh", width: "100vw" }}>
-          {/* List of shops */}
-          <div style={{ width: "50%", overflowY: "auto", padding: "1rem" }}>
-            <h2>Shops in Boulder</h2>
-            {shops.map((shop) => (
-              <div key={shop._id} style={{ marginBottom: "1rem" }}>
-                <h3>{shop.name}</h3>
-                <p>{shop.address}</p>
-              </div>
-            ))}
-        </div>
-
-      {/* Map */}
-      <div style={{ width: "50%", height: "100%" }}>
+      <div style={{ width: "80%", height: "80%" }}>
         <APIProvider apiKey={apiKey}>
           <Map defaultCenter={position} defaultZoom={13} style={{ height: "100%", width: "100%" }}>
             {shops.map((shop) => (
@@ -50,7 +38,6 @@ function MapPage() {
           </Map>
         </APIProvider>
       </div>
-    </div>
   );
 }
 
