@@ -6,7 +6,6 @@ import requests
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-api_key = ""
 
 
 def connection_test():  # connect to the database and return the client object
@@ -453,7 +452,6 @@ def get_all_shop_info():#modified function
     except Exception as e:
         print(f"Error getting all shop info: {e}")
         return []
-if __name__ == "__main__":
-    client = connection_test()
-    print(get_all_shop_info())
+
+client = connection_test()
 

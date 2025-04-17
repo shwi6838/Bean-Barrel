@@ -1,0 +1,3 @@
+# .env
+GOOGLE_MAPS_API_KEY='AIzaSyA2W8OdY5WDbOzpw9yrpekQdYlP5lOfxgE'
+DATABASE_URL="mongodb+srv://ziwa8314:X7iJVIeXiOpsRxad@googlecluster.8k1hr.mongodb.net/?retryWrites=true&w=majority&appName=googlecluster"

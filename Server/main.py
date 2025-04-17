@@ -50,13 +50,13 @@ def users():
     return jsonify({"users": []})
 
 # NEW: Recommendations & Reviews - Fetch sample shop data
-@app.route("/api/shops", methods=['GET'])
-def get_shops():
-    try:
-        shops = get_all_shop_info()
-        return jsonify({"shops": shops})
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+# @app.route("/api/shops", methods=['GET'])
+# def get_shops():
+#     try:
+#         shops = get_all_shop_info()
+#         return jsonify({"shops": shops})
+#     except Exception as e:
+#         return jsonify({"error": str(e)}), 500
 
 # --------- Run Server ---------
 if __name__ == "__main__":

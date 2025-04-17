@@ -11,6 +11,7 @@ deactivate
 
 In other:
 cd Client
+npm install --save-dev vite
 npm run dev
 Go to local host
 
