@@ -37,8 +37,8 @@ function MapPage() {
     const [selectedShop, setSelectedShop] = useState(null);
     const [loading, setLoading] = useState(true);
     const position = { lat: 40.015, lng: -105.2705 };
-    const apiKey = ''
-    const mapKey = ''
+    const apiKey = 'AIzaSyDXX20zekFzs4PzfhQ6G9g_8RvBn5aPflw'
+    const mapKey = '5fef3ee35a17f3f5'
     
    
     useEffect(() => {

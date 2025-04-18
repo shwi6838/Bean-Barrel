@@ -2,10 +2,11 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-function ListPage() {
-  const [favorites, setFavorites] = useState([]);
+function StoreListPage() {
+  const [stores, setStores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [addingToFav, setAddingToFav] = useState(null);
   const navigate = useNavigate();
 
   const checkAuth = async () => {
@@ -24,114 +25,121 @@ function ListPage() {
     }
   };
 
-  const fetchFavorites = async () => {
+  const fetchStores = async () => {
     try {
-      const res = await axios.get("http://localhost:3080/list/favorites", {
+      const res = await axios.get("http://localhost:3080/list/all", {
         withCredentials: true,
       });
-      setFavorites(res.data);
+      setStores(res.data);
     } catch (err) {
-      console.error("Failed to fetch favorites", err);
+      console.error("Error fetching stores", err);
     } finally {
       setLoading(false);
     }
   };
 
-  const handleRemove = async (storeId) => {
+  const handleAddFavorite = async (storeId) => {
+    if (!loggedIn) return;
+    setAddingToFav(storeId);
     try {
-      await axios.delete(`http://localhost:3080/list/favorites/${storeId}`, {
-        withCredentials: true,
-      });
-      setFavorites((prev) => prev.filter((id) => id !== storeId));
+      await axios.post(
+        "http://localhost:3080/api/favorites",
+        { store_id: storeId },
+        { withCredentials: true }
+      );
+      alert("Added to favorites!");
     } catch (err) {
-      console.error("Failed to remove favorite", err);
+      console.error("Failed to add to favorites", err);
+      alert("Failed to add. Maybe already added?");
+    } finally {
+      setAddingToFav(null);
     }
+  };
+
+  const handleViewOnMap = (storeId) => {
+    navigate(`/map?highlight=${storeId}`);
   };
 
   useEffect(() => {
     checkAuth();
+    fetchStores();
   }, []);
 
-  useEffect(() => {
-    if (loggedIn) {
-      fetchFavorites();
-    } else {
-      setLoading(false); // stop spinner if not logged in
-    }
-  }, [loggedIn]);
-
-  if (loading) return <div className="p-4 text-center">Loading...</div>;
-
-  if (!loggedIn) {
-    return (
-      <div className="p-8 text-center">
-        <h2 className="text-xl font-semibold mb-4">You're not logged in</h2>
-        <button
-          onClick={() => navigate("/login")}
-          style={{
-            backgroundColor: "#357bc1", // was var(--brand-color-dark)
-            color: "white",
-            padding: "0.75rem 1.5rem",
-            border: "none",
-            borderRadius: "8px",
-            fontSize: "1rem",
-            fontWeight: "bold",
-            cursor: "pointer",
-            transition: "background-color 0.3s ease",
-          }}
-          onMouseOver={(e) =>
-            (e.target.style.backgroundColor = "#4e9af1") // was var(--brand-color)
-          }
-          onMouseOut={(e) =>
-            (e.target.style.backgroundColor = "#357bc1")
-          }
-        >
-          Log In to See Your List
-        </button>
-      </div>
-    );
-  }
+  if (loading) return <div className="p-4">Loading stores...</div>;
 
   return (
-    <div className="p-4">
-      <h1 className="text-2xl font-bold mb-4">Your Saved Store IDs</h1>
-      {favorites.length === 0 ? (
-        <p>No saved places yet.</p>
-      ) : (
-        <ul className="space-y-2">
-          {favorites.map((storeId) => (
-            <li
-              key={storeId}
-              className="border rounded p-3 flex items-center justify-between"
-            >
-              <span>{storeId}</span>
+    <div className="p-4 space-y-4">
+      <h1 className="text-2xl font-bold mb-4">All Stores</h1>
+      {stores.map((store) => (
+        <div
+          key={store._id}
+          className="border rounded-lg p-4 flex flex-col md:flex-row gap-4 shadow"
+        >
+          <img
+            src={store.img || "/placeholder.jpg"}
+            alt={store.name}
+            className="w-full md:w-48 h-32 object-cover rounded"
+          />
+          <div className="flex-1">
+            <h2 className="text-xl font-semibold">{store.name}</h2>
+            <p className="text-sm text-gray-600 capitalize">
+              {Array.isArray(store.types) ? store.types.join(", ") : store.types}
+            </p>
+            <p className="text-sm">Rating: {store.rating ?? "N/A"}</p>
+            <p className="text-sm">
+              <a
+                href={store.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-600 underline hover:text-blue-800"
+              >
+                Visit Website
+              </a>
+            </p>
+
+            <p className="text-sm text-gray-700 mt-1">{store.address}</p>
+
+            <div className="mt-4 flex gap-2">
               <button
-                onClick={() => handleRemove(storeId)}
+                onClick={() => handleAddFavorite(store._id)}
+                disabled={!loggedIn || addingToFav === store._id}
                 style={{
-                  backgroundColor: "#357bc1", // was var(--brand-color-dark)
+                  backgroundColor: "#357bc1",
+                  color: "white",
+                  padding: "0.5rem 1rem",
+                  border: "none",
+                  borderRadius: "6px",
+                  fontWeight: "bold",
+                  cursor: loggedIn ? "pointer" : "not-allowed",
+                  opacity: loggedIn ? 1 : 0.6,
+                }}
+              >
+                {addingToFav === store._id
+                  ? "Adding..."
+                  : loggedIn
+                  ? "Add to Favorites"
+                  : "Login to Add"}
+              </button>
+              <button
+                onClick={() => handleViewOnMap(store._id)}
+                style={{
+                  backgroundColor: "#4e9af1",
                   color: "white",
                   padding: "0.5rem 1rem",
                   border: "none",
                   borderRadius: "6px",
                   fontWeight: "bold",
                   cursor: "pointer",
-                  transition: "background-color 0.3s ease",
                 }}
-                onMouseOver={(e) =>
-                  (e.target.style.backgroundColor = "#4e9af1") // was var(--brand-color)
-                }
-                onMouseOut={(e) =>
-                  (e.target.style.backgroundColor = "#357bc1")
-                }
               >
-                Remove
+                View on Map
               </button>
-            </li>
-          ))}
-        </ul>
-      )}
+            </div>
+          </div>
+        </div>
+      ))}
     </div>
   );
 }
 
-export default ListPage;
+export default StoreListPage;
