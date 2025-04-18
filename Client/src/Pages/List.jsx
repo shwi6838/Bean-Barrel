@@ -8,9 +8,12 @@ const googleKey = "AIzaSyDXX20zekFzs4PzfhQ6G9g_8RvBn5aPfl"; //add "w" in the end
 
 function StoreListPage() {
   const [stores, setStores] = useState([]);
+  const [filteredStores, setFilteredStores] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loggedIn, setLoggedIn] = useState(false);
   const [addingToFav, setAddingToFav] = useState(null);
+  const [sortOrder, setSortOrder] = useState("high"); // "high" or "low"
+  const [selectedTypes, setSelectedTypes] = useState(["restaurant", "cafe", "bar"]);
   const navigate = useNavigate();
 
   const checkAuth = async () => {
@@ -64,17 +67,80 @@ function StoreListPage() {
     navigate(`/map?highlight=${storeId}`);
   };
 
+  const handleTypeToggle = (type) => {
+    setSelectedTypes((prev) =>
+      prev.includes(type)
+        ? prev.filter((t) => t !== type)
+        : [...prev, type]
+    );
+  };
+
   useEffect(() => {
     checkAuth();
     fetchStores();
   }, []);
+  
+  useEffect(() => {
+    let result = [...stores];
+
+    // Filter by selected types
+    result = result.filter((store) =>
+      selectedTypes.some((type) =>
+        Array.isArray(store.types)
+          ? store.types.includes(type)
+          : store.types?.includes(type)
+      )
+    );
+
+    // Sort by rating
+    result.sort((a, b) => {
+      const ratingA = a.rating ?? 0;
+      const ratingB = b.rating ?? 0;
+      return sortOrder === "high" ? ratingB - ratingA : ratingA - ratingB;
+    });
+
+    setFilteredStores(result);
+  }, [stores, sortOrder, selectedTypes]);
 
   if (loading) return <div className="p-4">Loading stores...</div>;
 
   return (
     <div className="p-4 space-y-4">
       <h1 className="text-2xl font-bold mb-4">All Stores</h1>
-      {stores.map((store) => (
+
+      {/* Filters & Sorting */}
+      <div className="flex flex-wrap gap-4 items-center">
+        <div className="flex items-center gap-2">
+          <label className="font-semibold">Filter by Type:</label>
+          {["restaurant", "cafe", "bar"].map((type) => (
+            <label key={type} className="flex items-center gap-1 text-sm">
+              <input
+                type="checkbox"
+                checked={selectedTypes.includes(type)}
+                onChange={() => handleTypeToggle(type)}
+              />
+              {type}
+            </label>
+          ))}
+        </div>
+        
+        <div className="ml-auto flex items-center gap-2">
+          <label className="font-semibold">Sort by Rating:</label>
+          <select
+            value={sortOrder}
+            onChange={(e) => setSortOrder(e.target.value)}
+            className="border rounded px-2 py-1 text-sm"
+          >
+            <option value="high">High → Low</option>
+            <option value="low">Low → High</option>
+          </select>
+        </div>
+      </div>
+      
+
+
+
+      {filteredStores.map((store) => (
         <div
           key={store._id}
           className="border rounded-lg p-4 flex flex-col md:flex-row gap-4 shadow"
