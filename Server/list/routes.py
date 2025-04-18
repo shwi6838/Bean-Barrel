@@ -23,7 +23,6 @@ def get_all_list():
             "url": item[13]
             # 可选加更多字段
         })
-
     return jsonify(formatted_res)
 
 @favlist.route("/favorites", methods=["GET"])
