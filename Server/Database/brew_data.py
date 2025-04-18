@@ -6,7 +6,7 @@ import requests
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-
+api_key = ""
 
 def connection_test():  # connect to the database and return the client object
     uri = ("mongodb+srv://ziwa8314:X7iJVIeXiOpsRxad@googlecluster.8k1hr.mongodb.net/?retryWrites=true&w=majority"
@@ -358,47 +358,29 @@ def delete_from_favourite(user_id, favourite_id_to_remove):
         print(f"Error removing from favourite: {e}")
         return False
 
-def get_shop_photo_by_id(shop_id, max_width=400, max_height=400):#modified function
+def get_shop_photo_by_reference(photo_reference):#modified function
     """
-    Get shop photo by shop ID and image size
+    Get shop photo URL by photo reference with maximum possible size
     
     Args:
-        shop_id (str): Shop ID
-        max_width (int): Maximum width of the image, default is 400
-        max_height (int): Maximum height of the image, default is 400
+        photo_reference (str): Photo reference from Google Places API
         
     Returns:
-        bytes: Image data, returns None if failed
+        str: Photo URL, returns None if failed
     """
     try:
-        # Get shop information from database
-        db = client["brew&barrel"]
-        collection = db["stores"]
-        
-        # Query shop information
-        shop = collection.find_one({"place_id": shop_id})
-        
-        if not shop or "photo_reference" not in shop:
-            print(f"Shop {shop_id} not found or no photo available")
+        if not photo_reference:
+            print("Photo reference is empty")
             return None
             
-        # Get photo_reference
-        photo_reference = shop["photo_reference"]
+        # Build Google Places API URL with maximum width
+        # Note: Google Places API requires at least one size parameter
+        photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth=1920&photo_reference={photo_reference}&key={api_key}"
         
-        # Build Google Places API URL with both maxwidth and maxheight
-        photo_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={max_width}&maxheight={max_height}&photo_reference={photo_reference}&key={api_key}"
-        
-        # Send request to get image
-        response = requests.get(photo_url)
-        
-        if response.status_code == 200:
-            return response.content
-        else:
-            print(f"Failed to get image, status code: {response.status_code}")
-            return None
+        return photo_url
             
     except Exception as e:
-        print(f"Error getting shop photo: {e}")
+        print(f"Error getting shop photo URL: {e}")
         return None
     
 def get_shop_info_by_id(shop_id):#modified function
@@ -452,6 +434,8 @@ def get_all_shop_info():#modified function
     except Exception as e:
         print(f"Error getting all shop info: {e}")
         return []
+    
 
 client = connection_test()
+    
 
