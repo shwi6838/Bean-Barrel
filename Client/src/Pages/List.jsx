@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const googleKey = "AIzaSyDXX20zekFzs4PzfhQ6G9g_8RvBn5aPfl"; //add "w" in the end
+// also check the api line of Server/Database/brew_data.py 
+// and the api lines under function MapPage in Client/src/Pages/Map.jsx
+
 function StoreListPage() {
   const [stores, setStores] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -76,9 +80,20 @@ function StoreListPage() {
           className="border rounded-lg p-4 flex flex-col md:flex-row gap-4 shadow"
         >
           <img
-            src={store.img || "/placeholder.jpg"}
+            src={
+              store.img
+                ? `${store.img}&key=${googleKey}`
+                : "/placeholder.jpg"
+            }
             alt={store.name}
-            className="w-full md:w-48 h-32 object-cover rounded"
+            style={{
+              width: "50%",
+              height: "200px", // or adjust to taste
+              objectFit: "cover",
+              objectPosition: "center 50%", // center vertically for middle crop
+              borderRadius: "6px",
+              flexShrink: 0,
+            }}
           />
           <div className="flex-1">
             <h2 className="text-xl font-semibold">{store.name}</h2>

@@ -6,7 +6,9 @@ import requests
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-api_key = ''
+api_key = 'AIzaSyDXX20zekFzs4PzfhQ6G9g_8RvBn5aPfl' #add 'w' in the end
+## also check the api lines under function MapPage in Client/src/Pages/Map.jsx
+## and the api line of Client/src/Pages/List.jsx
 
 def connection_test():  # connect to the database and return the client object
     uri = ("mongodb+srv://ziwa8314:X7iJVIeXiOpsRxad@googlecluster.8k1hr.mongodb.net/?retryWrites=true&w=majority"
