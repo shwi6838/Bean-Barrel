@@ -15,7 +15,7 @@ def get_all_list():
             "lng": item[3],
             "place_id":item[4],
             "types":item[5],
-            "img":item[6],
+            "img":db.get_shop_photo_by_reference(item[6]),
             "rating":item[7],
             "address": item[10],
             "opening_hours":item[11],
