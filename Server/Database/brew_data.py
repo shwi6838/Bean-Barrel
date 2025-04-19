@@ -6,7 +6,10 @@ import requests
 from datetime import datetime
 from pymongo.mongo_client import MongoClient
 from pymongo.server_api import ServerApi
-api_key = 'AIzaSyDXX20zekFzs4PzfhQ6G9g_8RvBn5aPfl' #add 'w' in the end
+from dotenv import load_dotenv
+load_dotenv()
+
+api_key = os.getenv("GOOGLE_MAP_API")
 ## also check the api lines under function MapPage in Client/src/Pages/Map.jsx
 ## and the api line of Client/src/Pages/List.jsx
 

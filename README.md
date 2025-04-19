@@ -18,3 +18,19 @@ This project for ....
 </div>
 
 ## Demo
+
+## Notes
+Before you run this program, please create `.env` in Client and Server folders
+
+Client folder .env example
+```
+# Client/.env
+VITE_GOOGLE_MAP_API = 'YOUR GOOGLE MAP API'
+VITE_GOOGLE_MAP_ID = 'Your GOOGLE MAP ID'
+```
+
+Server folder .env example
+
+```
+GOOGLE_MAP_API = 'YOUR GOOGLE MAP API'
+```

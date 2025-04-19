@@ -37,8 +37,10 @@ function MapPage() {
     const [selectedShop, setSelectedShop] = useState(null);
     const [loading, setLoading] = useState(true);
     const position = { lat: 40.015, lng: -105.2705 };
-    const apiKey = 'AIzaSyDXX20zekFzs4PzfhQ6G9g_8RvBn5aPfl' //add 'w' in the end
-    const mapKey = '5fef3ee35a17f3f' //add '5' in the end
+    const apiKey = import.meta.env.VITE_GOOGLE_MAP_API; //add 'w' in the end
+    const mapKey = import.meta.env.VITE_GOOGLE_MAP_ID; //add '5' in the end
+
+    console.log(apiKey)
     // also check the api line of Server/Database/brew_data.py 
     // and the api line of Client/src/Pages/List.jsx
    
