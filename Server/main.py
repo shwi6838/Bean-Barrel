@@ -3,7 +3,8 @@ from flask import Flask, jsonify, session, request
 from flask_cors import CORS
 from auth.routes import auth
 from list.routes import favlist
-from Database.brew_data import connection_test, get_all_shop_info
+from Database.brew_data import connection_test
+from Database.shop_data import get_all_shop_info
 
 # Flask app setup
 app = Flask(__name__)
@@ -48,6 +49,11 @@ def users():
             ]
         })
     return jsonify({"users": []})
+
+@app.route('/api/shops', methods=['GET'])
+def shops_route():
+    data = get_all_shop_info()
+    return jsonify({"shops": data}) 
 
 # NEW: Recommendations & Reviews - Fetch sample shop data
 # @app.route("/api/shops", methods=['GET'])
