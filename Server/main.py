@@ -1,9 +1,8 @@
-import os
-from flask import Flask, jsonify, session, request
+from flask import Flask
 from flask_cors import CORS
 from auth.routes import auth
 from list.routes import favlist
-from Database.brew_data import connection_test, get_all_shop_info
+from Database.brew_data import connection_test
 
 # Flask app setup
 app = Flask(__name__)
@@ -29,34 +28,6 @@ client = connection_test()
 # Register blueprints
 app.register_blueprint(auth, url_prefix='/auth')
 app.register_blueprint(favlist, url_prefix='/list')
-
-# --------- Routes ---------
-
-# Existing user route (for session testing)
-@app.route("/api/users", methods=['GET'])
-def users():
-    if 'userid' in session:
-        return jsonify({
-            "users": [
-                {
-                    "id": session['userid'],
-                    "name": session['name'],
-                    "username": session['username'],
-                    "phone": session['phone'],
-                    "favlist": session['favlist']
-                }
-            ]
-        })
-    return jsonify({"users": []})
-
-# NEW: Recommendations & Reviews - Fetch sample shop data
-# @app.route("/api/shops", methods=['GET'])
-# def get_shops():
-#     try:
-#         shops = get_all_shop_info()
-#         return jsonify({"shops": shops})
-#     except Exception as e:
-#         return jsonify({"error": str(e)}), 500
 
 # --------- Run Server ---------
 if __name__ == "__main__":

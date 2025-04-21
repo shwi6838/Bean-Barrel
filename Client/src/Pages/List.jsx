@@ -18,7 +18,7 @@ function StoreListPage() {
 
   const checkAuth = async () => {
     try {
-      const res = await axios.get("http://localhost:3080/api/users", {
+      const res = await axios.get("http://localhost:3080/auth/api/users", {
         withCredentials: true,
       });
       if (res.data.users && res.data.users.length > 0) {

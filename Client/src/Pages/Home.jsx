@@ -20,7 +20,7 @@ function HomePage() {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await axios.get("http://localhost:3080/api/users", {
+        const response = await axios.get("http://localhost:3080/auth/api/users", {
           withCredentials: true,
         });
         setUsers(response.data.users);

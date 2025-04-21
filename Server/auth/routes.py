@@ -4,6 +4,21 @@ import Database.brew_data as db
 
 auth = Blueprint('auth', __name__)
 
+@auth.route('/api/users', methods=['GET'])
+def users():
+    if 'userid' in session:
+        return jsonify({
+            "users": [
+                {
+                    "id": session['userid'],
+                    "name": session['name'],
+                    "username": session['username'],
+                    "phone": session['phone'],
+                    "favlist": session['favlist']
+                }
+            ]
+        })
+    return jsonify({"users": []})
 
 @auth.route('/login', methods=['POST'])
 def login():
