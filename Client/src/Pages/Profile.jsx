@@ -13,7 +13,7 @@ function ProfilePage() {
     const [activeTab, setActiveTab] = useState("account");
     const fetchAPI = async () => {
         try {
-          const response = await axios.get("http://localhost:3080/api/users", {
+          const response = await axios.get("http://localhost:3080/auth/api/users", {
             withCredentials: true
           });
           console.log("API Response:", response.data);

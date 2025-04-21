@@ -20,11 +20,28 @@ function HomePage() {
   const [places, setPlaces] = useState([]);
   const [mapsReady, setMapsReady] = useState(false);
 
+<<<<<<< HEAD
   //  Debug load of Maps SDK
   const handleMapsLoad = () => {
     console.log("Google Maps SDK fully loaded!");
     setMapsReady(true);
   };
+=======
+  // Fetch user data (existing)
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const response = await axios.get("http://localhost:3080/auth/api/users", {
+          withCredentials: true,
+        });
+        setUsers(response.data.users);
+      } catch (err) {
+        console.error("Error fetching users:", err);
+      }
+    };
+    fetchUsers();
+  }, []);
+>>>>>>> 5a18ee307b797c4864b50d34f39887c33cdb9d63
 
   useEffect(() => {
     if (!mapsReady) {

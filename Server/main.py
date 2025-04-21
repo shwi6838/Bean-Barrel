@@ -1,10 +1,12 @@
-import os
-from flask import Flask, jsonify, session, request
+from flask import Flask
 from flask_cors import CORS
 from auth.routes import auth
 from list.routes import favlist
 from Database.brew_data import connection_test
+<<<<<<< HEAD
 from Database.shop_data import get_all_shop_info
+=======
+>>>>>>> 5a18ee307b797c4864b50d34f39887c33cdb9d63
 
 # Flask app setup
 app = Flask(__name__)
@@ -31,6 +33,7 @@ client = connection_test()
 app.register_blueprint(auth, url_prefix='/auth')
 app.register_blueprint(favlist, url_prefix='/list')
 
+<<<<<<< HEAD
 # --------- Routes ---------
 
 # Existing user route (for session testing)
@@ -64,6 +67,8 @@ def shops_route():
 #     except Exception as e:
 #         return jsonify({"error": str(e)}), 500
 
+=======
+>>>>>>> 5a18ee307b797c4864b50d34f39887c33cdb9d63
 # --------- Run Server ---------
 if __name__ == "__main__":
     app.run(debug=True, port=3080)
