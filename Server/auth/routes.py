@@ -14,14 +14,28 @@ def users():
                     "name": session['name'],
                     "username": session['username'],
                     "phone": session['phone'],
-                    "favlist": session['favlist']
+                    "favlist_name": session['favlist_name']
                 }
             ]
         })
     return jsonify({"users": []})
 
+
+@auth.route('/api/shops', methods=['GET'])
+def shopes():
+    if 'userid' in session:
+        shop_list = []
+        favlists = session['favlist']
+        for f in favlists:
+            res = db.get_shop_info_by_id(f)
+            item = {'shop_name':res[1],'rating':res[7],'addr':res[10]}
+            shop_list.append(item)
+    return jsonify(shop_list)
+
+
 @auth.route('/login', methods=['POST'])
 def login():
+    
     data = request.get_json()
     if not data:
         return jsonify({"error": "Invalid JSON data"}), 400
@@ -40,11 +54,11 @@ def login():
             r = db.get_shop_info_by_id(i)
             shop_favlist.append(r[1])
 
-        print(f"userid: {userid}, username:{username}, favlist:{shop_favlist}")
         session['userid'] = userid
         session['username'] = username
         session['name'] = name
-        session['favlist'] = shop_favlist
+        session['favlist'] = favlist
+        session['favlist_name'] = shop_favlist
         session['phone'] = phone
         print("Session after setting:", session)
         print("Session dict:", dict(session))

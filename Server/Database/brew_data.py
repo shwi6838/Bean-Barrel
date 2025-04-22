@@ -1,7 +1,5 @@
 import os
 import certifi
-import csv
-import requests
 # Press Ctrl+F8 to toggle the breakpoint.
 from datetime import datetime
 from pymongo.mongo_client import MongoClient

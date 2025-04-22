@@ -1,6 +1,5 @@
-from flask import Blueprint, Response, request, jsonify, session
+from flask import Blueprint, request, jsonify, session
 import Database.brew_data as db
-from bson.json_util import dumps
 favlist = Blueprint('list', __name__)
 
 @favlist.route("/all", methods=["GET"])

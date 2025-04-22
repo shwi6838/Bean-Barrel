@@ -16,13 +16,12 @@ function ProfilePage() {
           const response = await axios.get("http://localhost:3080/auth/api/users", {
             withCredentials: true
           });
-          console.log("API Response:", response.data);
-          console.log("Users data:", response.data.users);
+          
           const name = response.data.users[0]['name']
           const email = response.data.users[0]['username']
           const phone = response.data.users[0]['phone']
-          const favlist = response.data.users[0]['favlist']
-          setTestProfile({name, email, phone, favlist})
+          const favlist_name = response.data.users[0]['favlist_name']
+          setTestProfile({name, email, phone, favlist_name})
         } catch (err) {
           console.error("Error fetching data:", err);
         }
@@ -60,7 +59,7 @@ function ProfilePage() {
                     <Card.Body>
                         <Card.Title>Favorite Stores</Card.Title>
                         <Card.Text>
-                            {testProfile.favlist.map((id, index) => (
+                            {testProfile.favlist_name.map((id, index) => (
                                 <p key={index}>{id}</p>
                             ))}
                         </Card.Text>
