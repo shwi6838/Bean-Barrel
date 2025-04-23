@@ -40,9 +40,6 @@ function MapPage() {
     
     const apiKey = import.meta.env.VITE_GOOGLE_MAP_API; 
     const mapKey = import.meta.env.VITE_GOOGLE_MAP_ID
-
-    // also check the api line of Server/Database/brew_data.py 
-    // and the api line of Client/src/Pages/List.jsx
    
     useEffect(() => {
         const fetchShops = async () => {

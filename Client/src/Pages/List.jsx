@@ -2,10 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-
-// also check the api line of Server/Database/brew_data.py 
-// and the api lines under function MapPage in Client/src/Pages/Map.jsx
-
 function StoreListPage() {
   const [stores, setStores] = useState([]);
   const [filteredStores, setFilteredStores] = useState([]);
