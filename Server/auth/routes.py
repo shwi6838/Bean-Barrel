@@ -30,7 +30,8 @@ def shopes():
             res = db.get_shop_info_by_id(f)
             item = {'shop_name':res[1],'rating':res[7],'addr':res[10]}
             shop_list.append(item)
-    return jsonify(shop_list)
+        return jsonify(shop_list)
+    return jsonify([])
 
 
 @auth.route('/login', methods=['POST'])
