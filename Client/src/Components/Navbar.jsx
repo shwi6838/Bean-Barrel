@@ -55,6 +55,8 @@ const NavBar = () => { // Use arrow functions to define components so we can pas
             </>
           )}
         </Navbar.Collapse>
+        {/* switch for dark/light mode  */}
+        
       </div>
     </Navbar>
   );

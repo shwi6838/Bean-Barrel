@@ -95,13 +95,13 @@ def update_user_info():
     
     name = data.get('name')
     phone = data.get('phone')
-    email = session['email']
+    username = data.get['username']
     
     db.update_userinfo(username, phone, name)
     
     session['name'] = name
     session['phone'] = phone
-    session['email'] = email
+    session['username'] = username
     print("Session after update:", session)
     
     return jsonify({"success": True})
