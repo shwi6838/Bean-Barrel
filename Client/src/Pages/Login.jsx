@@ -88,15 +88,6 @@ function LoginPage() {
         />
         <br />
         <button type="submit">Login</button>
-        <button 
-          onClick={handleLogout} 
-          style={{ 
-            backgroundColor: 'red', 
-            color: 'white'
-          }}
-        >
-          Logout
-        </button>
       </form>
       <p>Don't have an account? <Link to="/register" className="register-link">Register</Link></p>
     </div>

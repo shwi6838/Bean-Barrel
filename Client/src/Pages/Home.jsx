@@ -78,12 +78,16 @@ function HomePage() {
   
         {/* Optional: Show users pulled from the API */}
         <div className="mt-5">
-          <h5>Test Users (from API):</h5>
-          {users.map((user) => (
-            <div key={user.id || user.name}>
-              <p><strong>{user.name}</strong></p>
-            </div>
-          ))}
+          <h3 className="mb-3 section-heading">Test if User (from API):</h3>
+          {users.length > 0 ? (
+            users.map((user) => (
+              <div key={user.id || user.name}>
+                <p><strong>{user.name}</strong></p>
+              </div>
+            ))
+          ) : (
+            <p>No users found.</p>
+          )}
         </div>
       </div>
   

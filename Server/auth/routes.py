@@ -33,7 +33,7 @@ def shopes():
         return jsonify(shop_list)
     return jsonify([])
 
-
+#Login
 @auth.route('/login', methods=['POST'])
 def login():
     
@@ -70,6 +70,7 @@ def login():
         return jsonify({"success": False, "error": res[0]})
 
 
+#Register User
 @auth.route('/register', methods=['POST'])
 def signup():
     data = request.get_json()
@@ -85,9 +86,27 @@ def signup():
         return jsonify({"success":True})
     return jsonify({"success":False})
 
-
+# Edit Profile
+@auth.route('/update', methods=['POST'])
+def update_user_info():
+    data = request.get_json()
+    if not data:
+        return jsonify({"error": "Invalid JSON data"}), 400
     
-
+    name = data.get('name')
+    phone = data.get('phone')
+    email = session['email']
+    
+    db.update_userinfo(username, phone, name)
+    
+    session['name'] = name
+    session['phone'] = phone
+    session['email'] = email
+    print("Session after update:", session)
+    
+    return jsonify({"success": True})
+ 
+# Logout
 @auth.route('/logout', methods=['POST'])
 def logout():
     session.clear()  # clean all session data

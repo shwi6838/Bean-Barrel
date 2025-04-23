@@ -2,8 +2,31 @@ import React from "react";
 import { Navbar, Nav, NavDropdown, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../App.css";
+import { useState, useEffect } from "react";
 
 const NavBar = () => { // Use arrow functions to define components so we can pass hooks and props if needed
+  const [session, setSession] = useState(null); // State to manage session data
+  // Fetch user data (existing)
+  useEffect(() => {
+    const fetchSession = async () => {
+      try {
+        const response = await fetch("http://localhost:3080/auth/api/users", {
+          method: "GET",
+          credentials: "include",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const data = await response.json();
+        setSession(data.users[0]);
+      } catch (error) {
+        console.error("Error fetching session:", error);
+      }
+    };
+    fetchSession();
+  }
+  , []); // Empty dependency array to run once on component mount
+
   return (
     <Navbar fixed="top" expand="lg" className="custom-navbar">
       <div className="container-fluid d-flex justify-content-between align-items-center">
@@ -18,8 +41,19 @@ const NavBar = () => { // Use arrow functions to define components so we can pas
             </NavDropdown>
             <Nav.Link as={Link} to="/profile" className="c-nav-link">Profile</Nav.Link>
           </Nav>
-            <Button as={Link} to="/login" className="ml-2 nav-button">Login</Button>
-            <Button as={Link} to="/register" className="ml-2 nav-button">Register</Button>
+          {/* If session, show user name and logout button */}
+          {session ? (
+            <>
+              <span>Hello, {session.name}</span>
+              <Button as={Link} to="/logout" className="ml-2 nav-button">Logout</Button>
+            </>
+          ) : (
+            <>
+              <span>Hello, Guest</span>
+              <Button as={Link} to="/login" className="ml-2 nav-button">Login</Button>
+              <Button as={Link} to="/register" className="ml-2 nav-button">Register</Button>
+            </>
+          )}
         </Navbar.Collapse>
       </div>
     </Navbar>

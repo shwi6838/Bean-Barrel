@@ -29,6 +29,6 @@ docker compose up -d (runs in background)
 docker compose down to stop containers
 
 docker compose up (to see logs - helpful)
-ctrl+ to stop container and ctrl+ to return to terminal
+ctrl+c to stop container and ctrl+c to return to terminal
 
 Note: Will fail to run container if mongodb connection fails
