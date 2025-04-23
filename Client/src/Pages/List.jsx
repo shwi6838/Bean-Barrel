@@ -11,7 +11,7 @@ function StoreListPage() {
   const [sortOrder, setSortOrder] = useState("high"); // "high" or "low"
   const [selectedTypes, setSelectedTypes] = useState(["restaurant", "cafe", "bar"]);
   const navigate = useNavigate();
-  const googleKey = import.meta.env.VITE_GOOGLE_MAP_API;
+  const googleKey = import.meta.env.VITE_GOOGLE_MAP_API; //check the .env files
 
   const checkAuth = async () => {
     try {

@@ -1,3 +1,6 @@
+make sure add corresponding .env files to Client and Server seperately
+
+
 To set up the server:
 make two terminals
 

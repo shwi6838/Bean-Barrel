@@ -39,7 +39,7 @@ function MapPage() {
     const position = { lat: 40.015, lng: -105.2705 };
     
     const apiKey = import.meta.env.VITE_GOOGLE_MAP_API; 
-    const mapKey = import.meta.env.VITE_GOOGLE_MAP_ID
+    const mapKey = import.meta.env.VITE_GOOGLE_MAP_ID //check the .env files
    
     useEffect(() => {
         const fetchShops = async () => {
