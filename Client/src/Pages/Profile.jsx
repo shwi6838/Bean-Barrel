@@ -58,11 +58,13 @@ function ProfilePage() {
                 <Card>
                     <Card.Body>
                         <Card.Title>Favorite Stores</Card.Title>
-                        <Card.Text>
-                            {testProfile.favlist_name.map((id, index) => (
-                                <p key={index}>{id}</p>
-                            ))}
-                        </Card.Text>
+                            <Card.Text>
+                                {testProfile.favlist_name && testProfile.favlist_name.length > 0 && (
+                                    testProfile.favlist_name.map((id, index) => (
+                                    <p key={index}>{id}</p>
+                                    ))
+                                )}
+                            </Card.Text>
                     </Card.Body>
                 </Card>
             )}

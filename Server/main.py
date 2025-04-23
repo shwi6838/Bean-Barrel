@@ -31,4 +31,4 @@ app.register_blueprint(favlist, url_prefix='/list')
 
 # --------- Run Server ---------
 if __name__ == "__main__":
-    app.run(debug=True, port=3080)
+    app.run(debug=True, host='0.0.0.0', port=3080)

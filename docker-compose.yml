@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./Client
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
+  backend:
+    build:
+      context: ./Server
+      dockerfile: Dockerfile
+    ports:
+      - "3080:3080"
+    environment:
+      - FLASK_APP=main.py
+      - FLASK_ENV=production
+      - PYTHONUNBUFFERED=1
+      - HOST=0.0.0.0
