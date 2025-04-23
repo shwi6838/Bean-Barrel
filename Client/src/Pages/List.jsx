@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const googleKey = "AIzaSyDXX20zekFzs4PzfhQ6G9g_8RvBn5aPfl"; //add "w" in the end
+
 // also check the api line of Server/Database/brew_data.py 
 // and the api lines under function MapPage in Client/src/Pages/Map.jsx
 
@@ -15,6 +15,7 @@ function StoreListPage() {
   const [sortOrder, setSortOrder] = useState("high"); // "high" or "low"
   const [selectedTypes, setSelectedTypes] = useState(["restaurant", "cafe", "bar"]);
   const navigate = useNavigate();
+  const googleKey = import.meta.env.VITE_GOOGLE_MAP_API;
 
   const checkAuth = async () => {
     try {
