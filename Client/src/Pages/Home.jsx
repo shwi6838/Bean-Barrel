@@ -59,7 +59,21 @@ function HomePage() {
             <img key={i} src={img} alt={`Banner ${i + 1}`} className="hero-img" />
           ))}
         </div>
-  
+        {/* User Info */}
+        <div className="mt-5">
+          <h3 className="mb-3 section-heading">Welcome User: </h3>
+          {users.length > 0 ? (
+            users.map((user) => (
+              <div color="Black" key={user.id || user.name}>
+                <p><strong>{user.name}</strong></p>
+              </div>
+            ))
+          ) : (
+            <p>No users found.</p>
+          )}
+          
+        </div>
+
         {/* Reviews Section */}
         <h3 className="mt-5 mb-3 section-heading">Recommendations & Reviews</h3>
         <div className="review-row">
@@ -77,18 +91,7 @@ function HomePage() {
         </div>
   
         {/* Optional: Show users pulled from the API */}
-        <div className="mt-5">
-          <h3 className="mb-3 section-heading">Test if User (from API):</h3>
-          {users.length > 0 ? (
-            users.map((user) => (
-              <div key={user.id || user.name}>
-                <p><strong>{user.name}</strong></p>
-              </div>
-            ))
-          ) : (
-            <p>No users found.</p>
-          )}
-        </div>
+       
       </div>
   
       <Footer />

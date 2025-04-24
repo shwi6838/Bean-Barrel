@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../Components/Navbar";
+import Footer from "../Components/Footer";
 
 function StoreListPage() {
   const [stores, setStores] = useState([]);
@@ -102,121 +104,125 @@ function StoreListPage() {
   if (loading) return <div className="p-4">Loading stores...</div>;
 
   return (
-    <div className="p-4 space-y-4">
-      <h1 className="text-2xl font-bold mb-4">All Stores</h1>
+    <>
+      <NavBar/>
+      <div className="p-4 space-y-4">
+        <h1 className="text-2xl font-bold mb-4">All Stores</h1>
 
-      {/* Filters & Sorting */}
-      <div className="flex flex-wrap gap-4 items-center">
-        <div className="flex items-center gap-2">
-          <label className="font-semibold">Filter by Type:</label>
-          {["restaurant", "cafe", "bar"].map((type) => (
-            <label key={type} className="flex items-center gap-1 text-sm">
-              <input
-                type="checkbox"
-                checked={selectedTypes.includes(type)}
-                onChange={() => handleTypeToggle(type)}
-              />
-              {type}
-            </label>
-          ))}
-        </div>
-        
-        <div className="ml-auto flex items-center gap-2">
-          <label className="font-semibold">Sort by Rating:</label>
-          <select
-            value={sortOrder}
-            onChange={(e) => setSortOrder(e.target.value)}
-            className="border rounded px-2 py-1 text-sm"
-          >
-            <option value="high">High → Low</option>
-            <option value="low">Low → High</option>
-          </select>
-        </div>
-      </div>
-      
-
-
-
-      {filteredStores.map((store) => (
-        <div
-          key={store._id}
-          className="border rounded-lg p-4 flex flex-col md:flex-row gap-4 shadow"
-        >
-          <img
-            src={
-              store.img
-                ? `${store.img}&key=${googleKey}`
-                : "/placeholder.jpg"
-            }
-            alt={store.name}
-            style={{
-              width: "50%",
-              height: "200px", // or adjust to taste
-              objectFit: "cover",
-              objectPosition: "center 50%", // center vertically for middle crop
-              borderRadius: "6px",
-              flexShrink: 0,
-            }}
-          />
-          <div className="flex-1">
-            <h2 className="text-xl font-semibold">{store.name}</h2>
-            <p className="text-sm text-gray-600 capitalize">
-              {Array.isArray(store.types) ? store.types.join(", ") : store.types}
-            </p>
-            <p className="text-sm">Rating: {store.rating ?? "N/A"}</p>
-            <p className="text-sm">
-              <a
-                href={store.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 underline hover:text-blue-800"
-              >
-                Visit Website
-              </a>
-            </p>
-
-            <p className="text-sm text-gray-700 mt-1">{store.address}</p>
-
-            <div className="mt-4 flex gap-2">
-              <button
-                onClick={() => handleAddFavorite(store._id)}
-                disabled={!loggedIn || addingToFav === store._id}
-                style={{
-                  backgroundColor: "#357bc1",
-                  color: "white",
-                  padding: "0.5rem 1rem",
-                  border: "none",
-                  borderRadius: "6px",
-                  fontWeight: "bold",
-                  cursor: loggedIn ? "pointer" : "not-allowed",
-                  opacity: loggedIn ? 1 : 0.6,
-                }}
-              >
-                {addingToFav === store._id
-                  ? "Adding..."
-                  : loggedIn
-                  ? "Add to Favorites"
-                  : "Login to Add"}
-              </button>
-              <button
-                onClick={() => handleViewOnMap(store._id)}
-                style={{
-                  backgroundColor: "#4e9af1",
-                  color: "white",
-                  padding: "0.5rem 1rem",
-                  border: "none",
-                  borderRadius: "6px",
-                  fontWeight: "bold",
-                  cursor: "pointer",
-                }}
-              >
-                View on Map
-              </button>
-            </div>
+        {/* Filters & Sorting */}
+        <div className="flex flex-wrap gap-4 items-center">
+          <div className="flex items-center gap-2">
+            <label className="font-semibold">Filter by Type:</label>
+            {["restaurant", "cafe", "bar"].map((type) => (
+              <label key={type} className="flex items-center gap-1 text-sm">
+                <input
+                  type="checkbox"
+                  checked={selectedTypes.includes(type)}
+                  onChange={() => handleTypeToggle(type)}
+                />
+                {type}
+              </label>
+            ))}
+          </div>
+          
+          <div className="ml-auto flex items-center gap-2">
+            <label className="font-semibold">Sort by Rating:</label>
+            <select
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+              className="border rounded px-2 py-1 text-sm"
+            >
+              <option value="high">High → Low</option>
+              <option value="low">Low → High</option>
+            </select>
           </div>
         </div>
-      ))}
-    </div>
+        
+
+
+
+        {filteredStores.map((store) => (
+          <div
+            key={store._id}
+            className="border rounded-lg p-4 flex flex-col md:flex-row gap-4 shadow"
+          >
+            <img
+              src={
+                store.img
+                  ? `${store.img}&key=${googleKey}`
+                  : "/placeholder.jpg"
+              }
+              alt={store.name}
+              style={{
+                width: "50%",
+                height: "200px", // or adjust to taste
+                objectFit: "cover",
+                objectPosition: "center 50%", // center vertically for middle crop
+                borderRadius: "6px",
+                flexShrink: 0,
+              }}
+            />
+            <div className="flex-1">
+              <h2 className="text-xl font-semibold">{store.name}</h2>
+              <p className="text-sm text-gray-600 capitalize">
+                {Array.isArray(store.types) ? store.types.join(", ") : store.types}
+              </p>
+              <p className="text-sm">Rating: {store.rating ?? "N/A"}</p>
+              <p className="text-sm">
+                <a
+                  href={store.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline hover:text-blue-800"
+                >
+                  Visit Website
+                </a>
+              </p>
+
+              <p className="text-sm text-gray-700 mt-1">{store.address}</p>
+
+              <div className="mt-4 flex gap-2">
+                <button
+                  onClick={() => handleAddFavorite(store._id)}
+                  disabled={!loggedIn || addingToFav === store._id}
+                  style={{
+                    backgroundColor: "#357bc1",
+                    color: "white",
+                    padding: "0.5rem 1rem",
+                    border: "none",
+                    borderRadius: "6px",
+                    fontWeight: "bold",
+                    cursor: loggedIn ? "pointer" : "not-allowed",
+                    opacity: loggedIn ? 1 : 0.6,
+                  }}
+                >
+                  {addingToFav === store._id
+                    ? "Adding..."
+                    : loggedIn
+                    ? "Add to Favorites"
+                    : "Login to Add"}
+                </button>
+                <button
+                  onClick={() => handleViewOnMap(store._id)}
+                  style={{
+                    backgroundColor: "#4e9af1",
+                    color: "white",
+                    padding: "0.5rem 1rem",
+                    border: "none",
+                    borderRadius: "6px",
+                    fontWeight: "bold",
+                    cursor: "pointer",
+                  }}
+                >
+                  View on Map
+                </button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <Footer />
+    </>
   );
 }
 

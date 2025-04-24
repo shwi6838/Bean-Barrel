@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { APIProvider, Map, AdvancedMarker, InfoWindow } from "@vis.gl/react-google-maps";
+import NavBar from "../Components/Navbar";
+import Footer from "../Components/Footer";
 
 // static testing data
 // const STATIC_SHOPS = [
@@ -37,7 +39,7 @@ function MapPage() {
     const [selectedShop, setSelectedShop] = useState(null);
     const [loading, setLoading] = useState(true);
     const position = { lat: 40.015, lng: -105.2705 };
-    
+
     const apiKey = import.meta.env.VITE_GOOGLE_MAP_API; 
     const mapKey = import.meta.env.VITE_GOOGLE_MAP_ID //check the .env files
    
@@ -71,58 +73,63 @@ function MapPage() {
 
 
     return (
-      <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
-        <APIProvider apiKey={apiKey}>
-          <Map
-            defaultCenter={position}
-            defaultZoom={13}
-            mapId={mapKey}
-            style={{ height: "100%", width: "100%" }} >
+      <>
+          <NavBar/>
+          <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+          <APIProvider apiKey={apiKey}>
+            <Map
+              defaultCenter={position}
+              defaultZoom={13}
+              mapId={mapKey}
+              style={{ height: "100%", width: "100%" }} >
 
-          {shops.map((shop) => (
-            <AdvancedMarker
-            key={shop.id}
-            position={{ lat: shop.lat, lng: shop.lng }}
-            title={shop.name}
-            onClick={() => setSelectedShop(shop)}
-            />
-          ))}
-          {selectedShop && (
-            <InfoWindow
-            position={{ lat: selectedShop.lat, lng: selectedShop.lng }}
-            onCloseClick={() => setSelectedShop(null)}
+            {shops.map((shop) => (
+              <AdvancedMarker
+              key={shop.id}
+              position={{ lat: shop.lat, lng: shop.lng }}
+              title={shop.name}
+              onClick={() => setSelectedShop(shop)}
+              />
+            ))}
+            {selectedShop && (
+              <InfoWindow
+              position={{ lat: selectedShop.lat, lng: selectedShop.lng }}
+              onCloseClick={() => setSelectedShop(null)}
+              >
+                <div>
+                  <h4>{selectedShop.name}</h4>
+                  <p>{selectedShop.address}</p>
+                  <p>Rating: {selectedShop.rating} ({selectedShop.reviews} reviews)</p>
+                  <a href={selectedShop.website} target="_blank" rel="noopener noreferrer">
+                    Website
+                  </a>
+                </div>
+              </InfoWindow>
+            )}
+            </Map>
+          </APIProvider>
+    
+          {loading && (
+            <div
+              style={{
+                position: "flex",
+                top: 20,
+                left: 20,
+                background: "white",
+                padding: "10px 15px",
+                borderRadius: "4px",
+                boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
+                zIndex: 1000,
+                fontWeight: "bold",
+              }}
             >
-              <div>
-                <h4>{selectedShop.name}</h4>
-                <p>{selectedShop.address}</p>
-                <p>Rating: {selectedShop.rating} ({selectedShop.reviews} reviews)</p>
-                <a href={selectedShop.website} target="_blank" rel="noopener noreferrer">
-                  Website
-                </a>
-              </div>
-            </InfoWindow>
+              Loading shops...
+            </div>
           )}
-          </Map>
-        </APIProvider>
-  
-        {loading && (
-          <div
-            style={{
-              position: "flex",
-              top: 20,
-              left: 20,
-              background: "white",
-              padding: "10px 15px",
-              borderRadius: "4px",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
-              zIndex: 1000,
-              fontWeight: "bold",
-            }}
-          >
-            Loading shops...
-          </div>
-        )}
-      </div>
+        </div>
+        <Footer />
+      </>
+      
     );
 }
 export default MapPage

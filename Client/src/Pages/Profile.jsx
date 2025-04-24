@@ -2,6 +2,8 @@
 import React, { useState,useEffect} from 'react';
 import { Container, Button, ButtonGroup, Card, Modal } from 'react-bootstrap';
 import axios from "axios";
+import NavBar from "../Components/Navbar";
+import Footer from "../Components/Footer";
 
 function ProfilePage() {
     const [testProfile, setTestProfile] = useState({
@@ -70,73 +72,78 @@ function ProfilePage() {
     }, []);
 
     return (
+        <>
+        <NavBar/>
         <Container fluid className="profile-page">
-            <div className="mt-3 mb-4">
-                <ButtonGroup>
-                    <Button className="nav-button" onClick={() => setActiveTab("account")}>Account Information</Button>
-                    <Button className="nav-button" onClick={() => setActiveTab("favorites")}>Favorite Stores</Button>
-                </ButtonGroup>
-            </div>
+                <div className="mt-3 mb-4">
+                    <ButtonGroup>
+                        <Button className="nav-button" onClick={() => setActiveTab("account")}>Account Information</Button>
+                        <Button className="nav-button" onClick={() => setActiveTab("favorites")}>Favorite Stores</Button>
+                    </ButtonGroup>
+                </div>
 
-            {activeTab === "account" && (
-                <Card>
-                    <Card.Body>
-                        <Card.Title>Account Information</Card.Title>
-                        <Card.Text>
-                            <p>Name: {testProfile.name}</p>
-                            <p>Email: {testProfile.email}</p>
-                            <p>Phone: {testProfile.phone}</p>
-                        </Card.Text>
-                    </Card.Body>
-                    <Button variant="primary" onClick={handleEditClick}>Edit Account</Button>
-                </Card>
-            )}
-
-            {activeTab === "favorites" && (
-                <Card>
-                    <Card.Body>
-                        <Card.Title>Favorite Stores</Card.Title>
+                {activeTab === "account" && (
+                    <Card>
+                        <Card.Body>
+                            <Card.Title>Account Information</Card.Title>
                             <Card.Text>
-                                {testProfile.favlist_name && testProfile.favlist_name.length > 0 ? (
-                                    testProfile.favlist_name.map((id, index) => (
-                                    <p key={index}>{id}</p>
-                                    ))
-                                ) : (
-                                    <p>No favorite stores found.</p>
-                                )}
+                                <p>Name: {testProfile.name}</p>
+                                <p>Email: {testProfile.email}</p>
+                                <p>Phone: {testProfile.phone}</p>
                             </Card.Text>
-                    </Card.Body>
-                </Card>
-            )}
+                        </Card.Body>
+                        <Button variant="primary" onClick={handleEditClick}>Edit Account</Button>
+                    </Card>
+                )}
 
-            {/*Modal for editedProfile */}
-                <Modal show={showModal} onHide={() => setShowModal(false)}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Edit Profile</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <form>
-                            <div className="mb-3">
-                                <label htmlFor="name" className="form-label">Name</label>
-                                <input type="text" className="form-control" id="name" name="name" value={editedProfile.name} onChange={handleChange} />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="email" className="form-label">Email</label>
-                                <input type="email" className="form-control" id="email" name="email" value={editedProfile.email} onChange={handleChange} />
-                            </div>
-                            <div className="mb-3">
-                                <label htmlFor="phone" className="form-label">Phone</label>
-                                <input type="text" className="form-control" id="phone" name="phone" value={editedProfile.phone} onChange={handleChange} />
-                            </div>
-                        </form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
-                        <Button variant="primary" onClick={handleSave}>Save Changes</Button>
-                    </Modal.Footer>
-                </Modal>
-        </Container>
-    );
+                {activeTab === "favorites" && (
+                    <Card>
+                        <Card.Body>
+                            <Card.Title>Favorite Stores</Card.Title>
+                                <Card.Text>
+                                    {testProfile.favlist_name && testProfile.favlist_name.length > 0 ? (
+                                        testProfile.favlist_name.map((id, index) => (
+                                        <p key={index}>{id}</p>
+                                        ))
+                                    ) : (
+                                        <p>No favorite stores found.</p>
+                                    )}
+                                </Card.Text>
+                        </Card.Body>
+                    </Card>
+                )}
+
+                {/*Modal for editedProfile */}
+                    <Modal show={showModal} onHide={() => setShowModal(false)}>
+                        <Modal.Header closeButton>
+                            <Modal.Title>Edit Profile</Modal.Title>
+                        </Modal.Header>
+                        <Modal.Body>
+                            <form>
+                                <div className="mb-3">
+                                    <label htmlFor="name" className="form-label">Name</label>
+                                    <input type="text" className="form-control" id="name" name="name" value={editedProfile.name} onChange={handleChange} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="email" className="form-label">Email</label>
+                                    <input type="email" className="form-control" id="email" name="email" value={editedProfile.email} onChange={handleChange} />
+                                </div>
+                                <div className="mb-3">
+                                    <label htmlFor="phone" className="form-label">Phone</label>
+                                    <input type="text" className="form-control" id="phone" name="phone" value={editedProfile.phone} onChange={handleChange} />
+                                </div>
+                            </form>
+                        </Modal.Body>
+                        <Modal.Footer>
+                            <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+                            <Button variant="primary" onClick={handleSave}>Save Changes</Button>
+                        </Modal.Footer>
+                    </Modal>
+            </Container>
+            <Footer />
+        </>
+            
+        );
 }
 
 export default ProfilePage

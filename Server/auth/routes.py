@@ -96,6 +96,7 @@ def update_user_info():
     name = data.get('name')
     phone = data.get('phone')
     email = session['email']
+    username = session['username']
     
     db.update_userinfo(username, phone, name)
     
