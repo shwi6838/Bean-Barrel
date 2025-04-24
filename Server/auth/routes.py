@@ -89,23 +89,23 @@ def signup():
 # Edit Profile
 @auth.route('/update', methods=['POST'])
 def update_user_info():
+
     data = request.get_json()
+    print(f"before update profile: {session}")
     if not data:
         return jsonify({"error": "Invalid JSON data"}), 400
-    
-    name = data.get('name')
+    user_id = session['userid']
+    email = data.get('email')
     phone = data.get('phone')
-    email = session['email']
-    username = session['username']
-    
-    db.update_userinfo(username, phone, name)
-    
-    session['name'] = name
-    session['phone'] = phone
-    session['username'] = username
-    print("Session after update:", session)
-    
-    return jsonify({"success": True})
+    name = data.get('name')
+
+    if(db.update_userinfo(user_id, email, phone, name)):
+        session['username'] = email
+        session['phone'] = phone
+        session['name'] = name
+        print("Session after update:", session)
+        return jsonify(session)
+    return jsonify({})
  
 # Logout
 @auth.route('/logout', methods=['POST'])

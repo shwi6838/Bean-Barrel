@@ -29,24 +29,25 @@ function ProfilePage() {
     
     const handleSave = async () => {
         try {
-          const response = await fetch("/update", {
+          const response = await fetch("http://localhost:3080/auth/update", {
             method: "POST",
+            credentials: 'include',
             headers: {
               "Content-Type": "application/json",
             },
             body: JSON.stringify(editedProfile),
           });
     
-          if (!response.ok) {
+          const data = await response.json();
+          if (!data) {
             throw new Error(`Failed to update profile: ${response.statusText}`);
           }
-    
-        const data = await response.json();
-        const name = data.users[0]['name']
-        const email = data.users[0]['username']
-        const phone = data.users[0]['phone']
-        const favlist_name = data.users[0]['favlist_name']
-        setTestProfile({name, email, phone, favlist_name})
+          console.info(data['name'])
+          const name = data['name']
+          const email = data['username']
+          const phone = data['phone']
+          const favlist_name = data['favlist_name']
+          setTestProfile({name, email, phone, favlist_name})
           setShowModal(false);
           alert("Profile updated successfully!");
         } catch (error) {

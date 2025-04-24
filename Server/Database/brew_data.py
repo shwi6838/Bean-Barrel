@@ -436,7 +436,7 @@ def get_all_shop_info():#modified function
         print(f"Error getting all shop info: {e}")
         return []
         
-def update_userinfo(user_id, user_name, Phone_number, name):
+def update_userinfo(user_id, email, Phone_number, name):
     """
     Update user information by user_id
     
@@ -463,8 +463,8 @@ def update_userinfo(user_id, user_name, Phone_number, name):
         
         # Build update content
         update_data = {}
-        if user_name:
-            update_data["user_name"] = user_name
+        if email:
+            update_data["email"] = email
         if Phone_number:
             update_data["Phone_number"] = Phone_number
         if name:
