@@ -102,7 +102,7 @@ def update_user_info():
     
     session['name'] = name
     session['phone'] = phone
-    session['email'] = email
+    session['username'] = username
     print("Session after update:", session)
     
     return jsonify({"success": True})

@@ -39,7 +39,7 @@ function MapPage() {
     const [selectedShop, setSelectedShop] = useState(null);
     const [loading, setLoading] = useState(true);
     const position = { lat: 40.015, lng: -105.2705 };
-
+    
     const apiKey = import.meta.env.VITE_GOOGLE_MAP_API; 
     const mapKey = import.meta.env.VITE_GOOGLE_MAP_ID //check the .env files
    
@@ -75,13 +75,19 @@ function MapPage() {
     return (
       <>
           <NavBar/>
-          <div style={{ width: "100vw", height: "100vh", position: "relative" }}>
+          <div class="map-page" style={{ width: "100vw", height: "100vh", position: "relative", justifyContent: "center", alignItems: "center" }}>
+          {loading && (
+            <div className="loading-map">
+              Loading shops...
+            </div>
+          )}
           <APIProvider apiKey={apiKey}>
             <Map
               defaultCenter={position}
               defaultZoom={13}
               mapId={mapKey}
-              style={{ height: "100%", width: "100%" }} >
+              style={{ height: "80%", width: "80%" }} 
+              className="map" >
 
             {shops.map((shop) => (
               <AdvancedMarker
@@ -96,7 +102,7 @@ function MapPage() {
               position={{ lat: selectedShop.lat, lng: selectedShop.lng }}
               onCloseClick={() => setSelectedShop(null)}
               >
-                <div>
+                <div className="store-info-window">
                   <h4>{selectedShop.name}</h4>
                   <p>{selectedShop.address}</p>
                   <p>Rating: {selectedShop.rating} ({selectedShop.reviews} reviews)</p>
@@ -108,26 +114,8 @@ function MapPage() {
             )}
             </Map>
           </APIProvider>
-    
-          {loading && (
-            <div
-              style={{
-                position: "flex",
-                top: 20,
-                left: 20,
-                background: "white",
-                padding: "10px 15px",
-                borderRadius: "4px",
-                boxShadow: "0 2px 8px rgba(0,0,0,0.3)",
-                zIndex: 1000,
-                fontWeight: "bold",
-              }}
-            >
-              Loading shops...
-            </div>
-          )}
         </div>
-        <Footer />
+        <Footer/>
       </>
       
     );

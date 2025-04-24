@@ -41,8 +41,12 @@ function ProfilePage() {
             throw new Error(`Failed to update profile: ${response.statusText}`);
           }
     
-          const data = await response.json();
-          setTestProfile(data.profile); // Update profile with the backend's response
+        const data = await response.json();
+        const name = data.users[0]['name']
+        const email = data.users[0]['username']
+        const phone = data.users[0]['phone']
+        const favlist_name = data.users[0]['favlist_name']
+        setTestProfile({name, email, phone, favlist_name})
           setShowModal(false);
           alert("Profile updated successfully!");
         } catch (error) {
@@ -75,17 +79,31 @@ function ProfilePage() {
         <>
         <NavBar/>
         <Container fluid className="profile-page">
-                <div className="mt-3 mb-4">
-                    <ButtonGroup>
-                        <Button className="nav-button" onClick={() => setActiveTab("account")}>Account Information</Button>
-                        <Button className="nav-button" onClick={() => setActiveTab("favorites")}>Favorite Stores</Button>
-                    </ButtonGroup>
-                </div>
+            <div className="mt-3 mb-3">
+                <ButtonGroup>
+                    <Button className="nav-button" onClick={() => setActiveTab("account")}>Account Information</Button>
+                    <Button className="nav-button" onClick={() => setActiveTab("favorites")}>Favorite Stores</Button>
+                </ButtonGroup>
+            </div>
 
-                {activeTab === "account" && (
-                    <Card>
-                        <Card.Body>
-                            <Card.Title>Account Information</Card.Title>
+            {activeTab === "account" && (
+                <Card className="account-card">
+                    <Card.Body>
+                        <Card.Title>Account Information</Card.Title>
+                        <Card.Text>
+                            <p>Name: {testProfile.name}</p>
+                            <p>Email: {testProfile.email}</p>
+                            <p>Phone: {testProfile.phone}</p>
+                        </Card.Text>
+                    </Card.Body>
+                    <Button variant="primary" onClick={handleEditClick}>Edit Account</Button>
+                </Card>
+            )}
+
+            {activeTab === "favorites" && (
+                <Card className="favorites-card">
+                    <Card.Body>
+                        <Card.Title>Favorite Stores</Card.Title>
                             <Card.Text>
                                 <p>Name: {testProfile.name}</p>
                                 <p>Email: {testProfile.email}</p>

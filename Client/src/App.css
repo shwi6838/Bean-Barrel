@@ -1,18 +1,20 @@
 #root {
   width: 100% !important;
-  margin: 0 auto;
-  padding: 0.1rem;
+  margin: 0 0;
+  /* padding: 0.1rem; */
   text-align: center;
+  /* background-color: var(--bg-rose); */
 }
 /* // CSS Variables for themeing */
 :root {
   --brand-color: #8f5f3d;
   --brand-color-light: #b8865a;
   --brand-color-dark: #5c3a21;
-
+  --brand-color-very-dark: #3b2a1f;
   --bg-rose: #ffe8e1;
   --brand-green: #2c3b2b;
   --brand-green-light: #60825e;
+  --brand-green-very-light: #a8c6a8;
   --brand-green-dark: #1f2a1f;
 }
 
@@ -150,6 +152,45 @@
   padding: 0 6%;
   height: 80vh;
   width: 100%;
+}
+
+/* ---------------Map Page CSS -------------------- */
+.map-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 6%;
+  height: 80vh;
+  width: 100%;
+  margin-top: 50px;
+  margin-bottom: 100px;
+}
+.loading-map {
+  background-Color: var(--brand-green-very-light);
+  padding: 10px 15px;
+  border-Radius: 4px;
+  box-Shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-Index: 1000;
+  font-Weight: bold;
+  margin-bottom: 10px;
+}
+.map {
+  width: 100%;
+  height: 80%;
+  border-radius: 10px;
+  border: 5px solid var(--brand-color-light);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ------------Profile Page CSS --------------------  */
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  justify-content: center;
+  padding: 0 6%;
+  height: 100vh;
 }
 
 
