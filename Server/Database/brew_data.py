@@ -435,7 +435,62 @@ def get_all_shop_info():#modified function
     except Exception as e:
         print(f"Error getting all shop info: {e}")
         return []
+        
+def update_userinfo(user_id, user_name, Phone_number, name):
+    """
+    Update user information by user_id
     
+    Args:
+        user_id (int/str): User ID to identify the user
+        user_name (str): New username
+        Phone_number (str): New phone number
+        name (str): New name
+        
+    Returns:
+        bool: Returns True if update successful, False otherwise
+    """
+    try:
+        # Get database and collection
+        db = client["brew&barrel"]
+        collection = db["user"]
+        
+        # Try to convert user_id to integer if it's a string
+        try:
+            if isinstance(user_id, str):
+                user_id = int(user_id)
+        except ValueError:
+            pass  # Keep it as string if conversion fails
+        
+        # Build update content
+        update_data = {}
+        if user_name:
+            update_data["user_name"] = user_name
+        if Phone_number:
+            update_data["Phone_number"] = Phone_number
+        if name:
+            update_data["name"] = name
+            
+        # If no data to update, return directly
+        if not update_data:
+            print("No information provided for update")
+            return False
+            
+        # Update user information using user_id as query condition
+        result = collection.update_one(
+            {"user_id": user_id},
+            {"$set": update_data}
+        )
+        
+        if result.modified_count > 0:
+            print(f"Successfully updated information for user ID {user_id}")
+            return True
+        else:
+            print(f"User with ID {user_id} not found or no information needs to be updated")
+            return False
+            
+    except Exception as e:
+        print(f"Error updating user information: {e}")
+        return False
 
 client = connection_test()
     
