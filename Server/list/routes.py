@@ -41,12 +41,22 @@ def add_favorite_list():
 
     user_id = session["userid"]
     data = request.get_json()
+    print(data)
     store_id = data.get("store_id")
 
     if not store_id:
         return jsonify({"error": "Missing store_id"}), 400
 
     success = db.add_to_favourite(user_id, store_id)
+    favlist = db.search_favourite_list(user_id) 
+    session['favlist'] = favlist
+
+    shop_favlist = []
+    for i in favlist:
+        r = db.get_shop_info_by_id(i)
+        if r:
+            shop_favlist.append(r[1])
+    session['favlist_name'] = shop_favlist
 
     if success:
         return jsonify({"message": "Favorite added"}), 200

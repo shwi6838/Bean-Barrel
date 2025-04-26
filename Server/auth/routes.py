@@ -49,11 +49,13 @@ def login():
     if res[0] == 'success':
         userid, name, phone = db.search_userinfo(username)
         favlist = db.search_favourite_list(user_id=userid)
+        print(favlist)
         
         shop_favlist = []
         for i in favlist:
             r = db.get_shop_info_by_id(i)
-            shop_favlist.append(r[1])
+            if r:
+                shop_favlist.append(r[1])
 
         session['userid'] = userid
         session['username'] = username

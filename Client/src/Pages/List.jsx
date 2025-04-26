@@ -49,7 +49,7 @@ function StoreListPage() {
     setAddingToFav(storeId);
     try {
       await axios.post(
-        "http://localhost:3080/api/favorites",
+        "http://localhost:3080/list/favorites",
         { store_id: storeId },
         { withCredentials: true }
       );
@@ -183,8 +183,8 @@ function StoreListPage() {
 
               <div className="mt-4 flex gap-2">
                 <button
-                  onClick={() => handleAddFavorite(store._id)}
-                  disabled={!loggedIn || addingToFav === store._id}
+                  onClick={() => handleAddFavorite(store.place_id)}
+                  disabled={!loggedIn || addingToFav === store.place_id}
                   style={{
                     backgroundColor: "#357bc1",
                     color: "white",
@@ -196,14 +196,14 @@ function StoreListPage() {
                     opacity: loggedIn ? 1 : 0.6,
                   }}
                 >
-                  {addingToFav === store._id
+                  {addingToFav === store.place_id
                     ? "Adding..."
                     : loggedIn
                     ? "Add to Favorites"
                     : "Login to Add"}
                 </button>
                 <button
-                  onClick={() => handleViewOnMap(store._id)}
+                  onClick={() => handleViewOnMap(store.place_id)}
                   style={{
                     backgroundColor: "#4e9af1",
                     color: "white",
