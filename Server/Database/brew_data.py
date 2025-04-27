@@ -491,7 +491,22 @@ def update_userinfo(user_id, email, Phone_number, name):
     except Exception as e:
         print(f"Error updating user information: {e}")
         return False
-
+        
+def pwd_hashing(pwd):
+    """
+    Hash the password using SHA-256 algorithm
+    
+    Args:
+        pwd (str): Password to be hashed
+        
+    Returns:
+        str: Hashed password string
+    """
+    pwd_bytes = pwd.encode('utf-8')
+    hash_obj = hashlib.sha256(pwd_bytes)
+    hashed_pwd = hash_obj.hexdigest()
+    return hashed_pwd
+    
 client = connection_test()
     
 
