@@ -78,7 +78,7 @@ function HomePage() {
         <h3 className="mt-5 mb-3 section-heading">Recommendations & Reviews</h3>
         <div className="review-row">
           {shops.length > 0 ? (
-            shops.slice(0, 3).map((shop, i) => (
+            shops.slice(0, 2).map((shop, i) => (
               <div className="review-card" key={i}>
                 <p className="fw-semibold">“{shop.shop_name}”</p>
                 <p className="text-muted">Rating: {shop.rating || "N/A"}</p>
