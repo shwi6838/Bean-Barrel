@@ -72,13 +72,17 @@ function ProfilePage() {
         }
       }
 
+    const handleFavoriteDelete = () => {
+        
+    }
+
     useEffect(() => {
       fetchUser();
     }, []);
 
     return (
         <>
-        <NavBar/>
+        
         <Container fluid className="profile-page">
             <div className="mt-3 mb-3">
                 <ButtonGroup>
@@ -100,20 +104,6 @@ function ProfilePage() {
                     <Button variant="primary" onClick={handleEditClick}>Edit Account</Button>
                 </Card>
             )}
-
-            {activeTab === "favorites" && (
-                <Card className="favorites-card">
-                    <Card.Body>
-                        <Card.Title>Favorite Stores</Card.Title>
-                            <Card.Text>
-                                <p>Name: {testProfile.name}</p>
-                                <p>Email: {testProfile.email}</p>
-                                <p>Phone: {testProfile.phone}</p>
-                            </Card.Text>
-                        </Card.Body>
-                        <Button variant="primary" onClick={handleEditClick}>Edit Account</Button>
-                    </Card>
-                )}
 
                 {activeTab === "favorites" && (
                     <Card>
@@ -159,7 +149,7 @@ function ProfilePage() {
                         </Modal.Footer>
                     </Modal>
             </Container>
-            <Footer />
+            
         </>
             
         );
