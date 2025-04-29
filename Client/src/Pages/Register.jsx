@@ -54,7 +54,9 @@ function RegisterPage() {
           <div className="login-card">
           <h2>Grab a Seat!</h2>
           {error && <p style={{ color: "red" }}>{error}</p>}
-          <form onSubmit={handleSubmit} className="mb-3">
+          <form onSubmit={handleSubmit} className=" mb-3">
+            <div className="register-form">
+            <div>
             <label htmlFor="Name">Name</label>
             <input
               type="text"
@@ -75,6 +77,8 @@ function RegisterPage() {
               required
             />
             <br />
+            </div>
+            <div>
             <label htmlFor="username">Username</label>
             <input
               type="text"
@@ -95,6 +99,8 @@ function RegisterPage() {
               required
             />
             <br />
+            </div>
+            </div>
             <button type="submit">Register an Account</button>
           </form>
           <p>Have an account? <Link to="/login" className="register-link">Login</Link></p>

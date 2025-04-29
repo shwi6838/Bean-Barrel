@@ -96,7 +96,7 @@
   align-items: center;
   justify-content: flex-end;
   padding: 0 6%;
-  height: 80vh;
+  height: auto;
   width: 100%;
 }
 
@@ -115,6 +115,8 @@
   justify-content: center;
   color: #ffffff; /* White text */
   font-family: "Arial", sans-serif;
+  margin-top: 30px;
+  margin-bottom: 30px;
 }
 
 .login-page h2 {
@@ -136,7 +138,6 @@
   outline: none;
   box-shadow: none;
 }
-
 .login-card .form-control::placeholder {
   color: var(--bg-rose);
   opacity: 0.6; /* Adjust opacity for placeholder */
@@ -151,6 +152,15 @@
   justify-content: flex-start;
   padding: 0 6%;
   height: 80vh;
+  width: 100%;
+}
+.register-form {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.register-form button {
   width: 100%;
 }
 
@@ -172,9 +182,11 @@
     margin: 100px 0;
     height: auto;
   }
-  .register-card {
+  .login-card {
     width: 90%;
     padding: 2rem;
+    margin-top: 20px;
+    margin-bottom: 20px;
   }
   .map-page {
     padding: 0 1%;
