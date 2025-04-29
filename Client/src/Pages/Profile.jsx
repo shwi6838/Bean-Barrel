@@ -72,9 +72,10 @@ function ProfilePage() {
         }
       }
 
-    const handleFavoriteDelete = () => {
-        
-    }
+    // Delete favorite store from the list and database
+      const handleFavoriteDelete = async (id) => {
+        console.log("Deleting favorite store with ID:", id);
+      }
 
     useEffect(() => {
       fetchUser();
@@ -84,35 +85,39 @@ function ProfilePage() {
         <>
         
         <Container fluid className="profile-page">
-            <div className="mt-3 mb-3">
+            <div className="mb-3">
                 <ButtonGroup>
-                    <Button className="nav-button" onClick={() => setActiveTab("account")}>Account Information</Button>
-                    <Button className="nav-button" onClick={() => setActiveTab("favorites")}>Favorite Stores</Button>
+                    <Button className="profile-tab" onClick={() => setActiveTab("account")}>Account Information</Button>
+                    <Button className="profile-tab" onClick={() => setActiveTab("favorites")}>Favorite Stores</Button>
                 </ButtonGroup>
             </div>
 
             {activeTab === "account" && (
                 <Card className="account-card">
                     <Card.Body>
-                        <Card.Title>Account Information</Card.Title>
-                        <Card.Text>
-                            <p>Name: {testProfile.name}</p>
+                        <Card.Title><h1>Account Information</h1></Card.Title>
+                        <Card.Text className="account-info">
+                            <p className="Name">{testProfile.name}</p>
                             <p>Email: {testProfile.email}</p>
                             <p>Phone: {testProfile.phone}</p>
                         </Card.Text>
                     </Card.Body>
-                    <Button variant="primary" onClick={handleEditClick}>Edit Account</Button>
+                    <button className="Edit-btn" onClick={handleEditClick}>Edit Account</button>
                 </Card>
             )}
 
                 {activeTab === "favorites" && (
-                    <Card>
+                    <Card className="favorites-card">
                         <Card.Body>
-                            <Card.Title>Favorite Stores</Card.Title>
+                            <Card.Title><h1>Favorite Stores</h1></Card.Title>
                                 <Card.Text>
+                                    <p>Don't See Any Stores? Go to <a href="/List">Discover</a></p>
                                     {testProfile.favlist_name && testProfile.favlist_name.length > 0 ? (
                                         testProfile.favlist_name.map((id, index) => (
+                                        <div className='d-flex justify-content-between' key={index}>
                                         <p key={index}>{id}</p>
+                                        <button className="btn" onClick={() => handleFavoriteDelete(id)}>Delete</button>
+                                        </div>
                                         ))
                                     ) : (
                                         <p>No favorite stores found.</p>
@@ -134,12 +139,13 @@ function ProfilePage() {
                                     <input type="text" className="form-control" id="name" name="name" value={editedProfile.name} onChange={handleChange} />
                                 </div>
                                 <div className="mb-3">
-                                    <label htmlFor="email" className="form-label">Email</label>
+                                    <label htmlFor="email" className="form-label">Email (Username)</label>
                                     <input type="email" className="form-control" id="email" name="email" value={editedProfile.email} onChange={handleChange} />
                                 </div>
                                 <div className="mb-3">
                                     <label htmlFor="phone" className="form-label">Phone</label>
                                     <input type="text" className="form-control" id="phone" name="phone" value={editedProfile.phone} onChange={handleChange} />
+                                    <p className="form-text">Phone Optional: For Future Features</p>
                                 </div>
                             </form>
                         </Modal.Body>

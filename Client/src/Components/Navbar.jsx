@@ -8,7 +8,6 @@ const NavBar = () => {
   const [session, setSession] = useState(null);
   const navigate = useNavigate();
 
-  useEffect(() => {
     const fetchSession = async () => {
       try {
         const response = await fetch("http://localhost:3080/auth/api/users", {
@@ -25,9 +24,6 @@ const NavBar = () => {
         console.error("Error fetching session:", error);
       }
     };
-
-    fetchSession();
-  }, []);
 
   const handleLogout = async () => {
     try {
@@ -49,6 +45,10 @@ const NavBar = () => {
       console.error("Error logging out:", error);
     }
   };
+  
+  useEffect(() => {
+        fetchSession();
+      }, []);
 
   return (
     <Navbar fixed="top" expand="lg" className="custom-navbar">

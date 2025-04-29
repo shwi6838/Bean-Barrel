@@ -109,14 +109,13 @@ def update_user_info():
         return jsonify(session)
     return jsonify({})
 
-@auth.route('/deleteFavorite', methods=['GET'])
-def deleteFavorite():
-    data.request.get_json()
-     if not data:
-        return jsonify({"error": "Invalid JSON data"}), 400
-    
-    f_shop_name = data.get("favorite_shop_name")
-    
+# @auth.route('/deleteFavorite', methods=['GET'])
+# def deleteFavorite():
+#     data.request.get_json()
+#      if not data:
+#         return jsonify({"error": "Invalid JSON data"}), 400
+#     f_shop_name = data.get("favorite_shop_name")
+
  
 # Logout
 @auth.route('/logout', methods=['POST'])

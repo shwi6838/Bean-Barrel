@@ -1,14 +1,16 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import NavBar from "../Components/Navbar";
-import Footer from "../Components/Footer";
-import "./Home.css";
+import "../Home.css";
+import { Container, Carousel, Row, Col } from 'react-bootstrap';
+
 
 // Banner images
 import banner1 from "../assets/banner1.jpg";
 import banner2 from "../assets/banner2.jpg";
 import banner4 from "../assets/banner4.jpg";
 import banner5 from "../assets/banner5.jpg";
+import logo from "../assets/BeanBarrel-Logo.png";
+
 
 const banners = [banner1, banner2, banner4, banner5];
 
@@ -48,33 +50,52 @@ function HomePage() {
 
   return (
     <>
-      <NavBar />
-  
-      <div className="home-left-aligned container mt-5">
-        <p className="subheading">Bar and Coffee Shop finder for Boulder, Colorado.</p>
-  
-        {/* Banner */}
-        <div className="hero-images mt-3">
+    <Container fluid className="home-page">
+      {/* Hero Section */}
+      <section id="Hero">
+        <div id="Hero-left">
+          <img src={logo} alt="Bean & Barrel Logo" className="logo" />
+          <h1 className="home-title mb-4">Bean & Barrel</h1>
+          <h4 className="subheading mb-3">Bar and Coffee Shop finder for Boulder, Colorado</h4>
+        </div>
+        {/* Hero Banner / Carousel */}
+        <Carousel className="w-90 mx-auto" id="img-banner">
           {banners.map((img, i) => (
-            <img key={i} src={img} alt={`Banner ${i + 1}`} className="hero-img" />
+            <Carousel.Item>
+              <img key={i} src={img} alt={`Banner ${i + 1}`} className="d-block hero-img" />
+            </Carousel.Item>
           ))}
-        </div>
-        {/* User Info */}
-        <div className="mt-5">
-          <h3 className="mb-3 section-heading">Welcome User: </h3>
-          {users.length > 0 ? (
-            users.map((user) => (
-              <div color="Black" key={user.id || user.name}>
-                <p><strong>{user.name}</strong></p>
-              </div>
-            ))
-          ) : (
-            <p>No users found.</p>
-          )}
-          
-        </div>
+        </Carousel>
+      </section>
+        {/* About Section */}
+        <section id="About">
+        <Container>
+          <h2 className="text-center mb-4 section-heading">About Bean & Barrel</h2>
+          <p className="text-center mx-auto w-75">
+            Bean & Barrel is a full-stack web application designed to help users find, review, and recommend coffee shops and bars in Boulder, Colorado. 
+            By combining user-friendly front-end design, robust back-end API management, and reliable data sources, it offers a seamless experience for discovering 
+            local beverage establishments. This project not only enhances the way people explore and support local businesses but also fosters community connection 
+            and informed decision-making.
+          </p>
 
+          <Row className="text-center mt-5">
+            <Col md={4}>
+              <i className="bi bi-geo-alt-fill display-4"></i>
+              <h5 className="mt-3">Find</h5>
+            </Col>
+            <Col md={4}>
+              <i className="bi bi-chat-dots-fill display-4"></i>
+              <h5 className="mt-3">Review</h5>
+            </Col>
+            <Col md={4}>
+              <i className="bi bi-people-fill display-4"></i>
+              <h5 className="mt-3">Recommend</h5>
+            </Col>
+          </Row>
+        </Container>
+        </section>
         {/* Reviews Section */}
+        <section id="Reviews">
         <h3 className="mt-5 mb-3 section-heading">Recommendations & Reviews</h3>
         <div className="review-row">
           {shops.length > 0 ? (
@@ -89,12 +110,18 @@ function HomePage() {
             <p>Loading reviews...</p>
           )}
         </div>
-  
-        {/* Optional: Show users pulled from the API */}
-       
-      </div>
-  
-      <Footer />
+        </section>
+        {/* Signup Section */}
+        <section id="Signup">
+          <h3 className="mt-5 mb-3 section-heading">Join the Community</h3>
+          <p className="text-center mx-auto w-75 mb-4">
+            Sign up today to start finding your favorite coffee shops and bars with the community. 
+          </p>
+          <div className="text-center mb-5">
+            <a href="/register" className="btn">Sign Up</a>
+          </div>
+        </section>
+      </Container>
     </>
   );  
 }

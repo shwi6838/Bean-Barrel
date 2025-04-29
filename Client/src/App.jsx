@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import './App.css'
+import 'bootstrap-icons/font/bootstrap-icons.css';
 // import axios from 'axios';
 import {
   BrowserRouter as Router,

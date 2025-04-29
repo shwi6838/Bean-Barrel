@@ -47,7 +47,7 @@
   justify-content: space-evenly !important;
   margin-bottom: 2rem;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(8px); /* Frosted glass effect */
+  backdrop-filter: blur(30px); /* Frosted glass effect */
 }
 .custom-navbar .c-nav-brand {
   color: var(--brand-color-dark) !important;
@@ -187,10 +187,160 @@
 .profile-page {
   display: flex;
   flex-direction: column;
-  align-items: left;
+  /* align-items: left; */
   justify-content: center;
-  padding: 0 6%;
+  margin-top: 0px;
+  padding: 0 2%;
   height: 100vh;
+}
+.profile-tab {
+  background-color: var(--brand-color);
+  padding: 10px 15px;
+  border: 2px solid var(--brand-color-light);
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  z-index: 1000;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.profile-tab:hover {
+  background-color: var(--brand-color-dark);
+  cursor: pointer;
+  border-color: #2c3b2b;
+}
+.profile-tab:active {
+  background-color: var(--brand-color-dark);
+  cursor: pointer;
+  border-color: #2c3b2b;
+}
+.profile-tab:focus {
+  background-color: var(--brand-color-dark);
+  cursor: pointer;
+  border-color: #2c3b2b;
+}
+.account-card {
+  border-radius: 10px;
+  padding: 3rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--brand-color-light); /* Subtle border */
+  border-radius: 12px; /* Rounded corners */
+  /* height: 400px; */
+  display: flex;
+  flex-direction: row;
+  align-items: left;
+}
+.account-card button {
+  background-color: var(--brand-green-light);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 50px;
+}
+.account-card button:hover {
+  background-color: var(--brand-green) !important;
+}
+.account-card h1, .favorites-card h1 {
+  font-size: 2rem;
+  text-align: left;
+  margin-bottom: 2rem;
+  margin-top: -30px;
+}
+.account-info {
+  text-align: left;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+  color: var(--brand-green-dark);
+}
+.Name {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--brand-green-dark);
+}
+.favorites-card {
+  border-radius: 10px;
+  padding: 3rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  border: 1px solid var(--brand-color-light); /* Subtle border */
+  border-radius: 12px; /* Rounded corners */
+  /* height: 400px; */
+  display: flex;
+  flex-direction: column;
+  align-items: right;
+  text-align: left;
+}
+.favorites-card button {
+  background-color: orangered;
+  color: white;
+  border: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  height: 30px;
+}
+.favorites-card button:hover {
+  background-color: red !important;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .login-page {
+    justify-content: center;
+    padding: 0 2%;
+    margin: 100px 0;
+    height: auto;
+  }
+  .login-card {
+    width: 90%;
+    padding: 2rem;
+  }
+  .register-page {
+    justify-content: center;
+    padding: 0 2%;
+    margin: 100px 0;
+    height: auto;
+  }
+  .register-card {
+    width: 90%;
+    padding: 2rem;
+  }
+  .map-page {
+    padding: 0 1%;
+    height: auto;
+    margin-left: -30px;
+  }
+  .map {
+    height: 60vh;
+  }
+  .profile-page {
+    padding: 0 2%;
+    height: auto;
+  }
+  .account-card {
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+  }
+  .profile-tab {
+    width: 100%;
+    text-align: center;
+    margin: 0.5rem 0;
+    margin-top: 100px;
+  }
+  .favorites-card {
+    margin-bottom: 100px;
+    padding: 0.6rem;
+    align-items: center;
+  }
+  .favorites-card p {
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+  .favorites-card h1 {
+    margin: 10px;
+  }
 }
 
 

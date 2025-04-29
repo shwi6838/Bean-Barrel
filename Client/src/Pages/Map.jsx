@@ -104,7 +104,6 @@ function MapPage() {
 
     return (
       <>
-        <NavBar/>
         <div class="map-page" style={{ width: "100vw", height: "100vh", position: "relative", justifyContent: "center", alignItems: "center" }}>
           {loading && (
             <div className="loading-map">
@@ -169,7 +168,6 @@ function MapPage() {
           </Map>
         </APIProvider>
         </div>
-        <Footer/>
       </>
     );
 }
