@@ -184,6 +184,20 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+/* ---------------List Page CSS -------------------- */
+.list-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3%;
+  height: 80vh;
+  max-width: 99vw;
+  margin-left: -30px;
+  margin-top: 100px;
+  margin-bottom: 100px;
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
   .login-page {
@@ -210,6 +224,7 @@
     padding: 0 1%;
     height: auto;
     margin-left: -30px;
+    padding-top: 68px;
   }
   .map {
     height: 60vh;

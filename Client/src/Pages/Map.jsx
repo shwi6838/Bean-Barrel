@@ -104,7 +104,7 @@ function MapPage() {
 
     return (
       <>
-        <div class="map-page" style={{ width: "100vw", height: "100vh", position: "relative", justifyContent: "center", alignItems: "center" }}>
+        <div class="map-page" style={{ width: "100vw", height: "100vh", position: "relative", justifyContent: "center", alignItems: "center", paddingTop: "32px" }}>
           {loading && (
             <div className="loading-map">
               Loading shops...
