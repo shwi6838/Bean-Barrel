@@ -16,7 +16,7 @@ const banners = [banner1, banner2, banner4, banner5];
 
 function HomePage() {
   const [users, setUsers] = useState([]);
-  const [favshops, setFavShops] = useState([]);
+  const [shops, setShops] = useState([]);
 
   // Fetch user data (existing)
   useEffect(() => {
@@ -33,19 +33,24 @@ function HomePage() {
     fetchUsers();
   }, []);
 
-  // Fetch shop data for reviews section
   useEffect(() => {
-    const fetchFavShops = async () => {
+    const fetchShops = async () => {
       try {
-        const response = await axios.get("http://localhost:3080/auth/api/shops", {
+        const response = await axios.get("http://localhost:3080/list/all", {
           withCredentials: true,
         });
-        setFavShops(response.data)
+
+        const allShops = response.data
+        const shuffled = allShops.sort(() => 0.5 - Math.random());
+        const selectedShops = shuffled.slice(0, 5);
+
+        setShops(selectedShops);
+        console.info(selectedShops)
       } catch (err) {
         console.error("Error fetching shops:", err);
       }
     };
-    fetchFavShops();
+    fetchShops();
   }, []);
 
   return (
@@ -94,20 +99,20 @@ function HomePage() {
           </Row>
         </Container>
         </section>
-        {/* Favorites Section */}
-        <section id="Favorites">
-        <h3 className="mt-5 mb-3 section-heading">Favorite Stores</h3>
+        {/* Reviews Section */}
+        <section id="Reviews">
+        <h3 className="mt-5 mb-3 section-heading">Recommendations & Reviews</h3>
         <div className="review-row">
-          {favshops.length > 0 ? (
-            favshops.slice(0, 4).map((shop, i) => (
+          {shops.length > 0 ? (
+            shops.slice(0, 4).map((shop, i) => (
               <div className="review-card" key={i}>
-                <p className="fw-semibold">“{shop.shop_name}”</p>
+                <p className="fw-semibold">“{shop.name}”</p>
                 <p className="text-muted">Rating: {shop.rating || "N/A"}</p>
-                <p className="text-muted">{shop.addr || "No location info"}</p>
+                <p className="text-muted">{shop.address || "No location info"}</p>
               </div>
             ))
           ) : (
-            <p className="">Login and Discover shops to get Favorites</p>
+            <p>Loading reviews...</p>
           )}
         </div>
         </section>
