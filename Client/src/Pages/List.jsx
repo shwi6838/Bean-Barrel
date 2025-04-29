@@ -3,8 +3,7 @@ import axios from "axios";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import { useNavigate } from "react-router-dom";
-import NavBar from "../Components/Navbar";
-import Footer from "../Components/Footer";
+import "../Map-List.css"
 
 function StoreListPage() {
   const [stores, setStores] = useState([]);

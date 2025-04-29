@@ -16,7 +16,7 @@ const banners = [banner1, banner2, banner4, banner5];
 
 function HomePage() {
   const [users, setUsers] = useState([]);
-  const [shops, setShops] = useState([]);
+  const [favshops, setFavShops] = useState([]);
 
   // Fetch user data (existing)
   useEffect(() => {
@@ -35,17 +35,17 @@ function HomePage() {
 
   // Fetch shop data for reviews section
   useEffect(() => {
-    const fetchShops = async () => {
+    const fetchFavShops = async () => {
       try {
         const response = await axios.get("http://localhost:3080/auth/api/shops", {
           withCredentials: true,
         });
-        setShops(response.data)
+        setFavShops(response.data)
       } catch (err) {
         console.error("Error fetching shops:", err);
       }
     };
-    fetchShops();
+    fetchFavShops();
   }, []);
 
   return (
@@ -72,7 +72,7 @@ function HomePage() {
         <Container>
           <h2 className="text-center mb-4 section-heading">About Bean & Barrel</h2>
           <p className="text-center mx-auto w-75">
-            Bean & Barrel is a full-stack web application designed to help users find, review, and recommend coffee shops and bars in Boulder, Colorado. 
+            Bean & Barrel is a full-stack web application designed to help users find and see reviews of coffee shops and bars in Boulder, Colorado. 
             By combining user-friendly front-end design, robust back-end API management, and reliable data sources, it offers a seamless experience for discovering 
             local beverage establishments. This project not only enhances the way people explore and support local businesses but also fosters community connection 
             and informed decision-making.
@@ -88,18 +88,18 @@ function HomePage() {
               <h5 className="mt-3">Review</h5>
             </Col>
             <Col md={4}>
-              <i className="bi bi-people-fill display-4"></i>
-              <h5 className="mt-3">Recommend</h5>
+              <i className="bi bi-heart-fill display-4"></i>
+              <h5 className="mt-3">Save</h5>
             </Col>
           </Row>
         </Container>
         </section>
-        {/* Reviews Section */}
-        <section id="Reviews">
-        <h3 className="mt-5 mb-3 section-heading">Recommendations & Reviews</h3>
+        {/* Favorites Section */}
+        <section id="Favorites">
+        <h3 className="mt-5 mb-3 section-heading">Favorite Stores</h3>
         <div className="review-row">
-          {shops.length > 0 ? (
-            shops.slice(0, 2).map((shop, i) => (
+          {favshops.length > 0 ? (
+            favshops.slice(0, 4).map((shop, i) => (
               <div className="review-card" key={i}>
                 <p className="fw-semibold">“{shop.shop_name}”</p>
                 <p className="text-muted">Rating: {shop.rating || "N/A"}</p>
@@ -107,10 +107,29 @@ function HomePage() {
               </div>
             ))
           ) : (
-            <p>Loading reviews...</p>
+            <p className="">Login and Discover shops to get Favorites</p>
           )}
         </div>
         </section>
+        {/* Stores Section */}
+        {/* <section id="Stores">
+          <h3 className="mt-5 mb-3 section-heading">Discover Random Stores</h3>
+          <div className="store-row">
+            {randomStores.length > 0 ? (
+              randomStores.map((store, i) => (
+                <div className="store-card" key={i}>
+                  <img src={store.image} alt={store.name} className="store-img" />
+                  <h5>{store.name}</h5>
+                  <p>{store.type}</p>
+                  <p>{store.rating}</p>
+                  <p>{store.addr}</p>
+                </div>
+              ))
+            ) : (
+              <p>No stores available</p>
+            )}
+          </div>
+        </section> */}
         {/* Signup Section */}
         <section id="Signup">
           <h3 className="mt-5 mb-3 section-heading">Join the Community</h3>

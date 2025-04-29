@@ -2,6 +2,7 @@
 import React, { useState,useEffect} from 'react';
 import { Container, Button, ButtonGroup, Card, Modal } from 'react-bootstrap';
 import axios from "axios";
+import "../Profile.css";
 
 function ProfilePage() {
     const [testProfile, setTestProfile] = useState({
@@ -128,18 +129,19 @@ function ProfilePage() {
                     <Card className="favorites-card">
                         <Card.Body>
                             <Card.Title><h1>Favorite Stores</h1></Card.Title>
-                                <Card.Text>
-                                    <p>Don't See Any Stores? Go to <a href="/List">Discover</a></p>
-                                    {testProfile.favlist_name && testProfile.favlist_name.length > 0 ? (
-                                        testProfile.favlist_name.map((id, index) => (
-                                        <div className='d-flex justify-content-between' key={index}>
+                            {testProfile.favlist_name.length > 0 && <p className='FSubheader'>Add Favorites from <a href="/List">Discover</a></p>}
+                            {/* show list of favorite stores */}
+                            <Card.Text>
+                                {testProfile.favlist_name && testProfile.favlist_name.length > 0 ? (
+                                    testProfile.favlist_name.map((id, index) => (
+                                        <div className='d-flex justify-content-between'>
                                         <p key={index}>{id}</p>
                                         <button className="btn" onClick={() => handleFavoriteDelete(id)}>Delete</button>
                                         </div>
-                                        ))
-                                    ) : (
-                                        <p>No favorite stores found.</p>
-                                    )}
+                                    ))
+                                ) : (
+                                    <p>Don't See Any Stores? Go to <a href="/List">Discover</a></p>
+                                )}
                                 </Card.Text>
                         </Card.Body>
                     </Card>

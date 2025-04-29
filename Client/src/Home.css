@@ -55,7 +55,7 @@ h3,
   max-height: 300px;
   max-width: 550px;
  }
-#Reviews {
+#Favorites {
   margin-bottom: 100px;
 }
 #About {
@@ -101,7 +101,7 @@ h3,
 /* Review Cards */
 .review-row {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   flex-wrap: wrap;
   gap: 16px;
   margin-top: 10px;
