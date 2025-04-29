@@ -111,7 +111,7 @@ function StoreListPage() {
 
   return(
     <>
-      <div className="list-page" style={{ width: "100vw", height: "100vh", position: "relative", justifyContent: "center", alignItems: "center", paddingTop: "32px" }}>
+      <div className="p-4 space-y-4">
         <h2 className="text-2xl font-bold mb-4">Drinks in Boulder, CO</h2>
 
         {/*Filters & Sotring*/}
