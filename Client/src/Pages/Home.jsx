@@ -37,10 +37,16 @@ function HomePage() {
   useEffect(() => {
     const fetchShops = async () => {
       try {
-        const response = await axios.get("http://localhost:3080/auth/api/shops", {
+        const response = await axios.get("http://localhost:3080/list/all", {
           withCredentials: true,
         });
-        setShops(response.data)
+
+        const allShops = response.data
+        const shuffled = allShops.sort(() => 0.5 - Math.random());
+        const selectedShops = shuffled.slice(0, 5);
+
+        setShops(selectedShops);
+        console.info(selectedShops)
       } catch (err) {
         console.error("Error fetching shops:", err);
       }
@@ -99,11 +105,11 @@ function HomePage() {
         <h3 className="mt-5 mb-3 section-heading">Recommendations & Reviews</h3>
         <div className="review-row">
           {shops.length > 0 ? (
-            shops.slice(0, 2).map((shop, i) => (
+            shops.slice(0, 5).map((shop, i) => (
               <div className="review-card" key={i}>
-                <p className="fw-semibold">“{shop.shop_name}”</p>
+                <p className="fw-semibold">“{shop.name}”</p>
                 <p className="text-muted">Rating: {shop.rating || "N/A"}</p>
-                <p className="text-muted">{shop.addr || "No location info"}</p>
+                <p className="text-muted">{shop.address || "No location info"}</p>
               </div>
             ))
           ) : (
