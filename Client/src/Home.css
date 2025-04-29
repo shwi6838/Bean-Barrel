@@ -55,8 +55,18 @@ h3,
   max-height: 300px;
   max-width: 550px;
  }
-#Favorites {
+#Random {
   margin-bottom: 100px;
+}
+.link {
+  display: block;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  color: var(--brand-green-dark);
+  text-decoration: none;
+  /* font-weight: bold; */
 }
 #About {
   margin-bottom: 100px;

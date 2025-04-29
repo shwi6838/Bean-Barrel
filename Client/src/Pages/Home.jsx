@@ -99,9 +99,9 @@ function HomePage() {
           </Row>
         </Container>
         </section>
-        {/* Reviews Section */}
-        <section id="Reviews">
-        <h3 className="mt-5 mb-3 section-heading">Recommendations & Reviews</h3>
+        {/* Random Section */}
+        <section id="Random">
+        <h3 className="mt-5 mb-3 section-heading">Discover Random Cafes / Bars</h3>
         <div className="review-row">
           {shops.length > 0 ? (
             shops.slice(0, 4).map((shop, i) => (
@@ -109,10 +109,13 @@ function HomePage() {
                 <p className="fw-semibold">“{shop.name}”</p>
                 <p className="text-muted">Rating: {shop.rating || "N/A"}</p>
                 <p className="text-muted">{shop.address || "No location info"}</p>
+                <p className="text-muted">{shop.phone || "No phone info"}</p>
+                {/* <p className="text-muted">{shop.type || "No type info"}</p> */}
+                <a href={shop.url} className="text-muted link">{shop.url || "No url"}</a>
               </div>
             ))
           ) : (
-            <p>Loading reviews...</p>
+            <p>Loading Random Stores...</p>
           )}
         </div>
         </section>
