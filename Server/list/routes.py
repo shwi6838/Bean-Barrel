@@ -64,15 +64,45 @@ def add_favorite_list():
         return jsonify({"error": "Already exists or failed to add"}), 400
 
 
-@favlist.route("/favorites/<store_id>", methods=["DELETE"])
-def remove_favorite_list(store_id):
+@favlist.route("/delete", methods=["DELETE"])
+def remove_favorite_list():
+    # if "userid" not in session:
+    #     return jsonify({"error": "Unauthorized"}), 401
+
+    # user_id = session["userid"]
+    # success = db.delete_from_favourite(user_id, store_id)
+
+    # if success:
+    #     return jsonify({"message": "Favorite removed"}), 200
+    # else:
+    #     return jsonify({"error": "Store not found in favorites or failed to remove"}), 404
     if "userid" not in session:
         return jsonify({"error": "Unauthorized"}), 401
+    print(session)
+    user_id = session['userid']
+    data = request.get_json()
 
-    user_id = session["userid"]
-    success = db.delete_from_favourite(user_id, store_id)
 
-    if success:
-        return jsonify({"message": "Favorite removed"}), 200
-    else:
-        return jsonify({"error": "Store not found in favorites or failed to remove"}), 404
+    if data['id'] not in session['favlist_name']:
+        return jsonify({"error": "Shop not found in favorites."}), 400
+    
+    index = session['favlist_name'].index(data['id'])
+    shop_id = session['favlist'][index]
+
+    success = db.delete_from_favourite(user_id, shop_id)
+    favlist = db.search_favourite_list(user_id) 
+    session['favlist'] = favlist
+
+    shop_favlist = []
+    for i in favlist:
+        r = db.get_shop_info_by_id(i)
+        if r:
+            shop_favlist.append(r[1])
+    session['favlist_name'] = shop_favlist
+
+    if not success:
+        return jsonify({"error": "Already exists or failed to add"}), 400
+    
+    return jsonify({"message": "Favorite Delete"}), 200
+    
+        

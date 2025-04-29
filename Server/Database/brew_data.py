@@ -1,3 +1,4 @@
+import hashlib
 import os
 import certifi
 # Press Ctrl+F8 to toggle the breakpoint.

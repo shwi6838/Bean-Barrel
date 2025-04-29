@@ -39,7 +39,7 @@ const NavBar = () => {
       if (data.success) {
         console.log("Logged out successfully");
         setSession(null); // Optional: clear session immediately
-        navigate("/map");
+        window.location.href = '/';;
       }
     } catch (error) {
       console.error("Error logging out:", error);

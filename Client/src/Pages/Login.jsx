@@ -8,25 +8,25 @@ function LoginPage() {
   const [error, setError] = useState(null);
   const navigate = useNavigate(); //Using Frontend pages navigate
 
-  const handleLogout = async () => {
-    try {
-      const response = await fetch("http://localhost:3080/auth/logout", {
-        method: "POST",
-        credentials: 'include',
-        headers: {
-          "Content-Type": "application/json",
-        }
-      });
+  // const handleLogout = async () => {
+  //   try {
+  //     const response = await fetch("http://localhost:3080/auth/logout", {
+  //       method: "POST",
+  //       credentials: 'include',
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //       }
+  //     });
 
-      const data = await response.json();
-      if (data.success) {
-        console.log("Logged out successfully");
-        navigate("/");
-      }
-    } catch (error) {
-      console.error("Error logging out:", error);
-    }
-  };
+  //     const data = await response.json();
+  //     if (data.success) {
+  //       console.log("Logged out successfully");
+  //       window.location.href = '/';;
+  //     }
+  //   } catch (error) {
+  //     console.error("Error logging out:", error);
+  //   }
+  // };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -47,7 +47,7 @@ function LoginPage() {
 
       if (data.success) {
         // navigate specific url
-        navigate("/");
+        window.location.href = '/';
       } else {
         setError(data.error || "Login failed. Please try again.");
       }

@@ -42,7 +42,7 @@ def login():
         return jsonify({"error": "Invalid JSON data"}), 400
     
     username = data.get("username")
-    password = data.get("password")
+    password = db.pwd_hashing(data.get("password"))
     
     res = db.verify("brew&barrel", "user", username, password)
     print(res)
@@ -81,7 +81,8 @@ def signup():
     name = data.get('name')
     phone = data.get('phone')
     username = data.get('username')
-    password = data.get('password')
+    password = db.pwd_hashing(data.get('password'))
+    
 
     if not db.verify_for_registration(username) and not db.verify_for_registration(phone):
         db.add_user(username,password,username,phone,name)
@@ -108,13 +109,6 @@ def update_user_info():
         print("Session after update:", session)
         return jsonify(session)
     return jsonify({})
-
-# @auth.route('/deleteFavorite', methods=['GET'])
-# def deleteFavorite():
-#     data.request.get_json()
-#      if not data:
-#         return jsonify({"error": "Invalid JSON data"}), 400
-#     f_shop_name = data.get("favorite_shop_name")
 
  
 # Logout

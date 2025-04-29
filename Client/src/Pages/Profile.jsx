@@ -2,8 +2,6 @@
 import React, { useState,useEffect} from 'react';
 import { Container, Button, ButtonGroup, Card, Modal } from 'react-bootstrap';
 import axios from "axios";
-import NavBar from "../Components/Navbar";
-import Footer from "../Components/Footer";
 
 function ProfilePage() {
     const [testProfile, setTestProfile] = useState({
@@ -50,6 +48,7 @@ function ProfilePage() {
           setTestProfile({name, email, phone, favlist_name})
           setShowModal(false);
           alert("Profile updated successfully!");
+          window.location.reload();
         } catch (error) {
           console.error("Error updating profile:", error);
           alert("Failed to update profile. Please try again.");
@@ -72,10 +71,29 @@ function ProfilePage() {
         }
       }
 
-    // Delete favorite store from the list and database
-      const handleFavoriteDelete = async (id) => {
-        console.log("Deleting favorite store with ID:", id);
+    const handleFavoriteDelete = async (id) => {
+      console.log("Deleting favorite store with ID:", id);
+      try {
+        const response = await fetch(`http://localhost:3080/list/delete`, {
+          method: "DELETE",
+          credentials: 'include',
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ id }),
+        });
+    
+        if (!response.ok) {
+          alert('Failed to delete favorite store');
+        }
+    
+        alert("Favorite store deleted successfully!");
+        window.location.reload();
+      } catch (error) {
+        console.error("Error deleting favorite store:", error);
+        alert("Failed to delete favorite store. Please try again.");
       }
+    };
 
     useEffect(() => {
       fetchUser();
