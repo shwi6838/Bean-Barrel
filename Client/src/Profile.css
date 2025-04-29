@@ -2,15 +2,22 @@
 .profile-page {
     display: flex;
     flex-direction: column;
-    /* align-items: left; */
     justify-content: center;
-    margin-top: 0px;
-    padding: 0 2%;
-    height: 100vh;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    height: 80vh;
+    background: linear-gradient(30deg, #d7c8af 0%,#c9aa78 50%,#c1a06b 51%,#d8c4a4 100%);
+    background-size: cover;
+    border-radius: 30px;
+    padding: 4%;
+  }
+  .account-tabs {
+    margin-bottom: 20px;
   }
   .profile-tab {
+    display: flex;
+    justify-content:start;
     background-color: var(--brand-color);
-    padding: 10px 15px;
     border: 2px solid var(--brand-color-light);
     border-radius: 4px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.3);
@@ -84,6 +91,8 @@
     flex-direction: column;
     align-items: right;
     text-align: left;
+    height: 50vh;
+    overflow-y: auto;
   }
   .favorites-card button {
     background-color: orangered;
@@ -132,5 +141,11 @@
       }
       .favorites-card h1 {
         margin: 10px;
+      }
+      .FSubheader {
+        margin-top: 0px;
+        font-size: 1.2rem;
+        font-weight:400;
+        text-align: center;
       }
 }

@@ -64,7 +64,7 @@ const NavBar = () => {
             </NavDropdown>
             <Nav.Link as={Link} to="/profile" className="c-nav-link">Profile</Nav.Link>
           </Nav>
-          <div className="d-flex align-items-center">
+          <div className="user-functions d-flex align-items-center">
             <span className="me-2">Hello, {session?.name || "Guest"}</span>
             {session ? (
               <Button onClick={handleLogout} className="ml-2 nav-button">Logout</Button>

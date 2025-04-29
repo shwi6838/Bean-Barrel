@@ -104,7 +104,7 @@ function ProfilePage() {
         <>
         
         <Container fluid className="profile-page">
-            <div className="mb-3">
+            <div className="account-tabs mb-3">
                 <ButtonGroup>
                     <Button className="profile-tab" onClick={() => setActiveTab("account")}>Account Information</Button>
                     <Button className="profile-tab" onClick={() => setActiveTab("favorites")}>Favorite Stores</Button>

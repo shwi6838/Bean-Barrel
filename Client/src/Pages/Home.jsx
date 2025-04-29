@@ -106,7 +106,7 @@ function HomePage() {
           {shops.length > 0 ? (
             shops.slice(0, 4).map((shop, i) => (
               <div className="review-card" key={i}>
-                <p className="fw-semibold">“{shop.name}”</p>
+                <p className="fw-semibold name">“{shop.name}”</p>
                 <p className="text-muted">Rating: {shop.rating || "N/A"}</p>
                 <p className="text-muted">{shop.address || "No location info"}</p>
                 <p className="text-muted">{shop.phone || "No phone info"}</p>
@@ -119,25 +119,6 @@ function HomePage() {
           )}
         </div>
         </section>
-        {/* Stores Section */}
-        {/* <section id="Stores">
-          <h3 className="mt-5 mb-3 section-heading">Discover Random Stores</h3>
-          <div className="store-row">
-            {randomStores.length > 0 ? (
-              randomStores.map((store, i) => (
-                <div className="store-card" key={i}>
-                  <img src={store.image} alt={store.name} className="store-img" />
-                  <h5>{store.name}</h5>
-                  <p>{store.type}</p>
-                  <p>{store.rating}</p>
-                  <p>{store.addr}</p>
-                </div>
-              ))
-            ) : (
-              <p>No stores available</p>
-            )}
-          </div>
-        </section> */}
         {/* Signup Section */}
         <section id="Signup">
           <h3 className="mt-5 mb-3 section-heading">Join the Community</h3>

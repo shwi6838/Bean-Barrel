@@ -3,11 +3,14 @@
   width : 100% !important;
   background-color: #fff;
   min-height: 100vh;
+  background: linear-gradient(30deg, #d7c8af 0%,#c9aa78 50%,#c1a06b 51%,#d8c4a4 100%);
+  background-size: cover;
+  border-radius: 30px;
 }
 /* Subheading (under title) */
 .subheading {
   font-size: 1.2rem;
-  color: #926545;
+  color: #694831;
   margin-bottom: 0.5rem;
   margin-top: 1rem;
 }
@@ -17,7 +20,7 @@ h1.fw-bold,
 p.lead,
 h3,
 .section-heading {
-  color: #926545;
+  color: #694831;;
   font-weight: 700;
 }
 
@@ -68,6 +71,10 @@ h3,
   text-decoration: none;
   /* font-weight: bold; */
 }
+.name {
+  font-weight: bold;
+  color: var(--brand-color-dark);
+}
 #About {
   margin-bottom: 100px;
   padding: 10px;
@@ -111,19 +118,29 @@ h3,
 /* Review Cards */
 .review-row {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   flex-wrap: wrap;
   gap: 16px;
   margin-top: 10px;
 }
 
 .review-card {
+  background-color:antiquewhite;
+  color: #694831;
   border: 1px solid #ccc;
   border-radius: 12px;
   padding: 20px;
   margin: 10px 10px 10px 0;
   width: 260px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.review-card:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s;
+}
+.review-card p {
+  margin: 0.4rem;
+  font-size: 1rem;
 }
 
 /* Media Queries */

@@ -111,11 +111,11 @@ function StoreListPage() {
 
   return(
     <>
-      <div className="p-4 space-y-4">
+      <div className="p-4 space-y-4 list-page">
         <h2 className="text-2xl font-bold mb-4">Drinks in Boulder, CO</h2>
 
-        {/*Filters & Sotring*/}
-        <div className="flex flex-nowrap gap-4 items-center">
+        {/*Filters & Sorting*/}
+        <div className="sort-container flex flex-nowrap gap-4 items-center">
           <div className="flex items-center gap-2">
             <label className="font-semibold">Type:</label>
             <ToggleButtonGroup value={selectedTypes} exclusive onChange={handleTypeChange} aria-label="type selection" size="small">
@@ -124,7 +124,6 @@ function StoreListPage() {
             </ToggleButtonGroup>
 
           </div>
-          <div style={{ height: '10px' }} />
           <div className="flex items-center gap-2">
             <label className="font-semibold">Sort Ratings:</label>
             <select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)} className="border rounded px-2 py-1 text-sm">
@@ -133,11 +132,11 @@ function StoreListPage() {
             </select>
           </div>
         </div>
-      
-
+        {/* Store List */}
         {filteredStores.map((store) => (
-          <div key={store.place_id} className="border rounded-lg p-4 flex flex-col md:flex-row gap-4 shadow">
-            <img src={
+          <div key={store.place_id} className="List-item">
+            <div className="Img-Name-Type">
+              <img src={
                 store.img
                   ? `${store.img}&key=${googleKey}`
                   : "/placeholder.jpg"
@@ -156,22 +155,22 @@ function StoreListPage() {
                 <h4 className="text-xl font-semibold">{store.name}</h4>
                 <p className="text-sm text-gray-600 capitalize">Type: {Array.isArray(store.types) ? store.types.join(", ") : store.types}</p>
                 <p className="text-sm">Rating: {store.rating ?? "N/A"}</p>
-                <div>
-                  <p>Today's Hours:</p>
-                  <p style={{ fontWeight: 'bold', color: '#007bff', margin: '4px 0' }}>{store.opening_hours[todayIdx]}</p>
-                </div>
-                <div style={{ height: '10px' }} />
+                <p style={{ fontWeight: 'bold', color: '#007bff', margin:  '0' }}>Today: {store.opening_hours[todayIdx]}</p>
+              </div>
+            </div>
+            <div className="flex-1">
                 <p className="text-sm text-gray-700 mt-1">{store.address}</p>
                 <p className="text-sm text-gray-700 mt-1">{store.phone}</p>
                 <p className="text-sm">
                   <a href={store.url} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline hover:text-blue-800"> Website</a>
                 </p>
-                <div className="mt-4 flex gap-2">
+                <div className=" btn-container mt-4 flex gap-2">
                   <button
+                    className="btn-add-fav"
                     onClick={() => handleAddFavorite(store.place_id)}
                     disabled={!loggedIn || addingToFav === store.place_id}
                     style={{
-                      backgroundColor: "#357bc1",
+                      backgroundColor: "#60825e",
                       color: "white",
                       padding: "0.5rem 1rem",
                       border: "none",
@@ -188,20 +187,11 @@ function StoreListPage() {
                       : "Login to Add"}
                   </button>
                   <button
+                    className="btn-view-map"
                     onClick={() => handleViewOnMap(store.place_id)}
-                    style={{
-                      backgroundColor: "#4e9af1",
-                      color: "white",
-                      padding: "0.5rem 1rem",
-                      border: "none",
-                      borderRadius: "6px",
-                      fontWeight: "bold",
-                      cursor: "pointer",
-                    }}
                   >
                     View on Map
                   </button>
-
                 </div>
               </div>
             </div>

@@ -1,10 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { APIProvider, Map, AdvancedMarker, InfoWindow, useAdvancedMarkerRef } from "@vis.gl/react-google-maps";
+import { APIProvider, Map, AdvancedMarker, InfoWindow, useAdvancedMarkerRef, Pin } from "@vis.gl/react-google-maps";
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-import NavBar from "../Components/Navbar";
-import Footer from "../Components/Footer";
 // npm install @mui/material @emotion/react @emotion/styled
 
 // Plotting the shops
@@ -20,7 +18,8 @@ function ShopMarker({ shop, isSelected, onClick, onClose }) {
         position={{ lat: Number(shop.lat), lng: Number(shop.lng) }}
         title={shop.name}
         onClick={() => onClick(shop)}
-      />
+      >
+      </AdvancedMarker>
       {isSelected && marker && (
         <InfoWindow anchor={marker} onCloseClick={onClose}>
             <div style={{
@@ -104,7 +103,7 @@ function MapPage() {
 
     return (
       <>
-        <div class="map-page" style={{ width: "100vw", height: "100vh", position: "relative", justifyContent: "center", alignItems: "center" }}>
+        <div class="map-page">
           {loading && (
             <div className="loading-map">
               Loading shops...
@@ -163,6 +162,7 @@ function MapPage() {
                 isSelected={selectedShop && selectedShop._id === shop._id}
                 onClick={() => setSelectedShop(shop)}
                 onClose={() => setSelectedShop(null)}
+                className="shop-marker"
               />
             ))}
           </Map>
