@@ -27,6 +27,9 @@ Bean & Barrel is a full-stack web application designed to help users find, revie
 
 ## Demo
 
+https://github.com/user-attachments/assets/87e79e44-1a76-445c-8b4c-d9878a45cf2f
+
+
 ## Notes
 Before you run this program, please create `.env` in Client and Server folders
 
