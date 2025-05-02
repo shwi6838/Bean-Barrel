@@ -60,7 +60,7 @@ https://github.com/user-attachments/assets/87e79e44-1a76-445c-8b4c-d9878a45cf2f
 
 ## Live Website
 
-[Bean Barrel Web](http://104.155.170.107:5173/)
+We provide a live website, so feel free to play with it :) [Bean Barrel Web](http://104.155.170.107:5173/)
 
 
 <div align="center">
