@@ -8,7 +8,7 @@ def get_all_list():
     formatted_res = []
     for item in res:
         formatted_res.append({
-            "_id": str(item[0]),  # 转换 ObjectId
+            "_id": str(item[0]), 
             "name": item[1],
             "lat": item[2],
             "lng": item[3],
@@ -20,7 +20,6 @@ def get_all_list():
             "opening_hours":item[11],
             "phone": item[12],
             "url": item[13]
-            # 可选加更多字段
         })
     return jsonify(formatted_res)
 
@@ -66,16 +65,7 @@ def add_favorite_list():
 
 @favlist.route("/delete", methods=["DELETE"])
 def remove_favorite_list():
-    # if "userid" not in session:
-    #     return jsonify({"error": "Unauthorized"}), 401
-
-    # user_id = session["userid"]
-    # success = db.delete_from_favourite(user_id, store_id)
-
-    # if success:
-    #     return jsonify({"message": "Favorite removed"}), 200
-    # else:
-    #     return jsonify({"error": "Store not found in favorites or failed to remove"}), 404
+    
     if "userid" not in session:
         return jsonify({"error": "Unauthorized"}), 401
     print(session)
