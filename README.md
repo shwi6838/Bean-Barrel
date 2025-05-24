@@ -58,11 +58,6 @@ sudo docker ps -a
 
 https://github.com/user-attachments/assets/87e79e44-1a76-445c-8b4c-d9878a45cf2f
 
-## Live Website
-
-We provide a live website, so feel free to play with it :) [Bean Barrel Web](http://104.155.170.107:5173/)
-
-
 <div align="center">
     <img src="https://private-user-images.githubusercontent.com/74038190/240304586-d48893bd-0757-481c-8d7e-ba3e163feae7.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDUzNzUzMTcsIm5iZiI6MTc0NTM3NTAxNywicGF0aCI6Ii83NDAzODE5MC8yNDAzMDQ1ODYtZDQ4ODkzYmQtMDc1Ny00ODFjLThkN2UtYmEzZTE2M2ZlYWU3LnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA0MjMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNDIzVDAyMjMzN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWFlOTA0OWEzZGVlYmFmNmI0NmYwZmM3MThiNzJjMTY1MDE5MDlmOWMwZmJjNmY4NmU4MzRmMDE0OTkxMjg0MWImWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.-U_ajFZqj5tU-ELSRINIjNtMavpDNj7ygbGXeo4qTtI">
 </div>
